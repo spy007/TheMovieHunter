@@ -1,0 +1,6 @@
+framework module Pods_TheMovieHunter {
+  umbrella header "Pods-TheMovieHunter-umbrella.h"
+
+  export *
+  module * { export * }
+}
