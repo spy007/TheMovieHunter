@@ -3,34 +3,32 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MovieTableViewController.tableView(_:cellForRowAt:):MovieTableViewController.swift">
+         contextName = "closure #1 in MovieTableViewController.searchBar(_:textDidChange:):MovieTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewController.getData():MovieTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "movies[indexPath.row]">
+               value = "mov.id">
+            </PersistentString>
+            <PersistentString
+               value = "Int(m.id!)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MovieTableViewController.loadMovies():MovieTableViewController.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in MovieTableViewController.loadMovies():MovieTableViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "MovieTableViewCell.awakeFromNib():MovieTableViewCell.swift">
+         contextName = "CoreDataManager.deleteAllData(entityName:):CoreDataManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "movie.backdrop_path">
-            </PersistentString>
-            <PersistentString
-               value = "movie">
+               value = "items1.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MovieViewController.viewDidLoad():MovieViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #1 in closure #1 in MovieTableViewController.loadMovies(genres:):MovieTableViewController.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in MovieTableViewController.loadMovies():MovieTableViewController.swift">
@@ -49,7 +47,86 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in MovieTableViewController.loadMovies():MovieTableViewController.swift">
+         contextName = "CoreDataManager.save(navigationController:movieResults:genres:):CoreDataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "movie.vote_count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static UrlManager.getGenresUrl():UrlManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "genre_list">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MovieTableViewController.loadMovies():MovieTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "jsonDecoder.decode(Json4Swift_Base.self, from: data!)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CoreDataManager.getMovies():CoreDataManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewController.loadMoviesData():MovieTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UrlManager.getGenresUrl()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MovieViewController.viewDidLoad():MovieViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "movie.vote_count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewController.tableView(_:cellForRowAt:):MovieTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "movies[indexPath.row]">
+            </PersistentString>
+            <PersistentString
+               value = "(movie?.vote_count!)!/2">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewController.tableView(_:numberOfRowsInSection:):MovieTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewCell.awakeFromNib():MovieTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "movie.backdrop_path">
+            </PersistentString>
+            <PersistentString
+               value = "movie">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewController.saveToDb():MovieTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSDecimalNumber(string: &quot;\(vote ?? 0)&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "String(&quot;\(id)&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "Int(&quot;6&quot;)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88E9EC28B8B46C3631E6B242B50F4442"
-               BuildableName = "Alamofire.framework"
-               BlueprintName = "Alamofire"
-               ReferencedContainer = "container:Pods.xcodeproj">
+               BlueprintIdentifier = "8A9EF24E20F34C6300188E69"
+               BuildableName = "TheMovieHunter.app"
+               BlueprintName = "TheMovieHunter"
+               ReferencedContainer = "container:TheMovieHunter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8A9EF24E20F34C6300188E69"
+            BuildableName = "TheMovieHunter.app"
+            BlueprintName = "TheMovieHunter"
+            ReferencedContainer = "container:TheMovieHunter.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -36,21 +45,23 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = "fr"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "88E9EC28B8B46C3631E6B242B50F4442"
-            BuildableName = "Alamofire.framework"
-            BlueprintName = "Alamofire"
-            ReferencedContainer = "container:Pods.xcodeproj">
+            BlueprintIdentifier = "8A9EF24E20F34C6300188E69"
+            BuildableName = "TheMovieHunter.app"
+            BlueprintName = "TheMovieHunter"
+            ReferencedContainer = "container:TheMovieHunter.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,6 +71,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8A9EF24E20F34C6300188E69"
+            BuildableName = "TheMovieHunter.app"
+            BlueprintName = "TheMovieHunter"
+            ReferencedContainer = "container:TheMovieHunter.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

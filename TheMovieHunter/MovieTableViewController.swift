@@ -11,18 +11,33 @@ import os.log
 import Realm
 import RealmSwift
 
-class MovieTableViewController: UITableViewController {
+class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
-    var movies = [MovieResults?]()
+    //MARK: Properties
+    
+    var loadingMoviesAlert: UIAlertController! = nil
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var searchActive : Bool = false
+    var filtered: [Movie] = []
+    var movies: [Movie] = []
+    var mng: CoreDataManager? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mng = CoreDataManager()
+        
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
-        loadMovies()
-        //        loadContacts()
+        showAlert()
+        
+        // load from server
+        loadMoviesData()
+        
+        // Setup delegates
+        searchBar.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,72 +45,72 @@ class MovieTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func loadMovies() {
-        print("Printing movies: ")
+    // MARK: Private methods
+    
+    func loadMoviesData() {
         
-        let url = URL(string: Constants.base_url)
-        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
             let jsonDecoder = JSONDecoder()
-            let responseModel = try? jsonDecoder.decode(Json4Swift_Base.self, from: data!)
+            let genresJson = try? jsonDecoder.decode(GenresJson.self, from: data!)
             
-            if let movies = responseModel!.results {
-                self.movies = movies
+            if let genres = genresJson?.genres {
+                DispatchQueue.main.async {
+                    self.mng?.deleteAllData(entityName: String(describing: Genre.self))
+                    self.mng?.save(navigationController: self.navigationController, movieGenres: genres)
+                    
+                    self.loadMovies(genres: genres)
+                }
             }
+            }.resume()
+    }
+    
+    func loadMovies(genres: [MovieGenre]?) {
+        
+        URLSession.shared.dataTask(with: UrlManager.getMoviesUrl()) { (data, response, error) in
+            let jsonDecoder = JSONDecoder()
+            let responseModel = try? jsonDecoder.decode(MoviesJson.self, from: data!)
             
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            if let movieResults = responseModel!.results {
+                
+                DispatchQueue.main.async {
+                    self.mng?.deleteAllData(entityName: String(describing: Movie.self))
+                    self.mng?.save(navigationController: self.navigationController, movieResults: movieResults, genres: genres)
+                    
+                    self.movies = (self.mng?.getMovies())!
+                    
+                    self.loadingMoviesAlert.dismiss(animated: true, completion: nil)
+                    
+                    self.tableView.reloadData()
+                }
             }
             // TODO: it commented because it fails to save in realm because of problems with id:
             // https://stackoverflow.com/a/26152634/1931613
             // 'RLMException', reason: 'Primary key property 'id' does not exist on object 'MovieResults''
             // even if defined primaryKey() as it said to do according to above link
-            //                RealmManager.addOrUpdate(model: self.model, object: responseModel?.results, completionHandler: { (error) in
-            //                    if let err = error {
-            //                        print("Error \(err.localizedDescription)")
-            //                    } else {
-            //                        RealmManager.fetch(model: self.model, condition: nil, completionHandler: { (result) in
+            
+            //            RealmManager.addOrUpdate(model: Constants.model, object: responseModel, completionHandler: { (error) in
+            //                if let err = error {
+            //                    print("Error \(err.localizedDescription)")
+            //                } else {
+            //                    RealmManager.fetch(model: Constants.model, condition: nil, completionHandler: { (result) in
             //
-            //                            for m in result {
-            //                                if let movie = m as? MovieResults {
-            //                                    self.movies.append(movie)
-            //                                    print(movie.title)
-            //                                }
+            //                        for m in result {
+            //                            if let movie = m as? MovieResults {
+            //                                self.movies.append(movie)
+            //                                print(movie.id)
             //                            }
+            //                        }
             //
-            //                            self.tableView.reloadData()
-            //                        })
-            //                    }
-            //                })
-        }
-        
-        task.resume()
+            //                        self.tableView.reloadData()
+            //                    })
+            //                }
+            //            })
+            }.resume()
     }
     
-    func loadContacts() {
-        print("Printing contacts: ")
-        
-        HttpGetRequest.getContacts("https://api.androidhive.info/contacts/") { (contactsArr) -> Void in
-            
-            if contactsArr != nil, contactsArr.count > 0  {
-                RealmManager.addOrUpdate(model: Constants.model, object: contactsArr, completionHandler: { (error) in
-                    if let err = error {
-                        print("Error \(err.localizedDescription)")
-                    } else {
-                        RealmManager.fetch(model: Constants.model, condition: nil, completionHandler: { (result) in
-                            
-                            for contact in result {
-                                if let c = contact as? Contact {
-                                    //                            self.contacts.append(c)
-                                    //                                    print(c.getName())
-                                }
-                            }
-                            
-                            self.tableView.reloadData()
-                        })
-                    }
-                })
-            }
-        }
+    private func showAlert() {
+        self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
+        self.present(self.loadingMoviesAlert, animated: false, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -107,6 +122,9 @@ class MovieTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if(searchActive) {
+            return filtered.count
+        }
         return movies.count
     }
     
@@ -115,18 +133,24 @@ class MovieTableViewController: UITableViewController {
         let cellIdentifier = "MovieTableViewCell"
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MovieTableViewCell  else {
-            fatalError("The dequeued cell is not an instance of ContactTableViewCell.")
+            fatalError("The dequeued cell is not an instance of MovieTableViewCell.")
         }
         
-        let movie = movies[indexPath.row]
+        var movie: Movie?
+        if (searchActive) {
+            movie = filtered[indexPath.row]
+        }
+        else {
+            movie = movies[indexPath.row]
+        }
         if movie != nil {
-            cell.labelMovie.text = movie?.original_title
+            cell.labelMovie.text = movie?.title
             // set image by url async
-            if let url = movie?.backdrop_path {
-                let image_url = Constants.base_image_url + url
-                let downloadURL = URL(string: image_url)!
-                cell.movieImageView.af_setImage(withURL: downloadURL)
-                cell.ratingControl.starCount = 2// Int((movie?.popularity)!)
+            if let image_path = movie?.backdrop_path {
+                cell.movieImageView.af_setImage(withURL: UrlManager.getImageUrl(imgPath: image_path))
+                if let vote = Int((movie?.vote_average)!/2) as Int? {
+                    cell.ratingControl.voteAverage = vote
+                }
             }
         }
         
@@ -148,7 +172,7 @@ class MovieTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             //            let predicate = NSPredicate(format: "id == %@", deletedItem.getId())
-            //
+            //ead
             //            if let productToDelete = realm.objects(Contact.self)
             //                .filter(predicate).first {
             //                realm.delete(productToDelete)
@@ -208,7 +232,7 @@ class MovieTableViewController: UITableViewController {
             movieDetailViewController.movie = selectedMovie
             
         default:
-            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+            fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
         }
     }
     
@@ -241,4 +265,41 @@ class MovieTableViewController: UITableViewController {
             }
         }
     }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.count == 0 {
+            searchActive = false;
+            self.tableView.reloadData()
+        } else {
+            filtered = movies.filter({ (movie) -> Bool in
+                let tmp: NSString = movie.title! as NSString
+                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+                return range.location != NSNotFound
+            })
+            if(filtered.count == 0){
+                searchActive = false;
+            } else {
+                searchActive = true;
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
 }

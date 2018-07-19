@@ -11,25 +11,51 @@ import os.log
 
 class MovieViewController: UIViewController {
     
-    var movie: MovieResults?
-    
-    @IBOutlet weak var labelMovieTitle: UILabel!
+    //MARK: Properties
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+    @IBOutlet weak var labelMovieTitle: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
+    @IBOutlet weak var ratingControl: VoteControl!
+    @IBOutlet weak var labelOverview: UILabel!
+    @IBOutlet weak var labelVoteCount: UILabel!
+    @IBOutlet weak var labelPopularity: UILabel!
+    @IBOutlet weak var labelCaptionReleaseDate: UILabel!
+    @IBOutlet weak var labelReleaseDate: UILabel!
+    @IBOutlet weak var labelGenres: UILabel!
     
-    @IBOutlet weak var ratingControl: RatingControl!
+    var movie: Movie?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let movie = movie, let title = movie.title {
+        let releaseDate = NSLocalizedString("releaseDate", comment: "Date of film release")
+        let attributedText = NSMutableAttributedString(string: releaseDate/*, attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18), NSAttributedStringKey.foregroundColor: UIColor.black]*/)
+        labelCaptionReleaseDate!.attributedText = attributedText
+        
+        if let movie = movie as Movie?, let title = movie.title {
             labelMovieTitle.text = title
-            let image_url = Constants.base_image_url + (movie.backdrop_path)!
-            let downloadURL = URL(string: image_url)!
-            movieImageView.af_setImage(withURL: downloadURL)
-            ratingControl.starCount = Int(movie.popularity!)
+            
+            if let image_path = movie.poster_path {
+                movieImageView.af_setImage(withURL: UrlManager.getImageUrl(imgPath: image_path))
+            }
+            
+            if let vote = Int((movie.vote_average)/2) as Int? {
+                ratingControl.voteAverage = vote
+            }
+            
+            labelOverview.text = movie.overview
+            
+            if let voteCount = movie.vote_count {
+                labelVoteCount.text = "\(voteCount)"
+            }
+            
+            let popularity = movie.popularity
+            labelPopularity.text = "\(popularity)"
+            
+            labelReleaseDate.text = movie.release_date
+            
+            labelGenres.text = movie.genres
         }
     }
     

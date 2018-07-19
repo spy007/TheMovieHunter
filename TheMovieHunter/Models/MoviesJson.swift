@@ -12,7 +12,7 @@ import Foundation
 
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class Json4Swift_Base : Decodable {
+public class MoviesJson : Decodable {
     var page : Int!
     var total_results : Int!
     var total_pages : Int!

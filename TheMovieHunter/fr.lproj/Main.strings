@@ -1,0 +1,33 @@
+
+/* Class = "UILabel"; text = "Genres"; ObjectID = "5tp-pp-Mr3"; */
+"5tp-pp-Mr3.text" = "Genres";
+
+/* Class = "UILabel"; text = "Movie name"; ObjectID = "6WC-i7-kpi"; */
+"6WC-i7-kpi.text" = "Movie name";
+
+/* Class = "UILabel"; text = "00-00-00"; ObjectID = "BNa-0J-4C6"; */
+"BNa-0J-4C6.text" = "00-00-00";
+
+/* Class = "UINavigationItem"; title = "Movie"; ObjectID = "MUy-9p-OSl"; */
+"MUy-9p-OSl.title" = "Movie";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "NaP-qC-4aK"; */
+"NaP-qC-4aK.text" = "0";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "Yw0-iV-WOs"; */
+"Yw0-iV-WOs.text" = "Description";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "n9T-G3-K4r"; */
+"n9T-G3-K4r.text" = "0";
+
+/* Class = "UILabel"; text = "Genres list"; ObjectID = "r3G-kM-z1c"; */
+"r3G-kM-z1c.text" = "Genres list";
+
+/* Class = "UILabel"; text = "Movie"; ObjectID = "ro6-Ve-avY"; */
+"ro6-Ve-avY.text" = "Movie";
+
+/* Class = "UILabel"; text = "Release date:"; ObjectID = "uf0-Ca-wOO"; */
+"uf0-Ca-wOO.text" = "Release date:";
+
+/* Class = "UINavigationItem"; title = "Movies"; ObjectID = "wJA-Gs-wMa"; */
+"wJA-Gs-wMa.title" = "Movies";
