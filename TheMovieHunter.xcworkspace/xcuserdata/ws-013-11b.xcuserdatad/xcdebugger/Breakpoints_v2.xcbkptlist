@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.4252501"
+            timestampString = "554136456.53072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "didReceiveMemoryWarning()"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.425467"
+            timestampString = "554136456.530822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "tableView(_:canEditRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,7 +250,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieViewController.swift"
-            timestampString = "553700368.42563"
+            timestampString = "554041057.47901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieViewController.swift"
-            timestampString = "553700368.426025"
+            timestampString = "554041057.479087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.426298"
+            timestampString = "554136456.530942"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.426702"
+            timestampString = "554136456.53102"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.426873"
+            timestampString = "554136456.531095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -378,13 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.42707"
+            timestampString = "554136456.53119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "287"
-            endingLineNumber = "287"
-            landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
+            startingLineNumber = "318"
+            endingLineNumber = "318">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -394,13 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.427231"
+            timestampString = "554136456.5312639"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
-            landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
+            startingLineNumber = "323"
+            endingLineNumber = "323">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -442,13 +438,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.42739"
+            timestampString = "554136456.5313359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
-            landmarkName = "searchBar(_:textDidChange:)"
-            landmarkType = "7">
+            startingLineNumber = "332"
+            endingLineNumber = "332">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -554,11 +548,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.42764"
+            timestampString = "554136456.531484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "loadMoviesData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -570,11 +564,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.427713"
+            timestampString = "554136456.5315599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "loadMoviesData()"
             landmarkType = "7">
             <Locations>
@@ -618,11 +612,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.4277821"
+            timestampString = "554136456.531635"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "loadMoviesData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -634,11 +628,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.427852"
+            timestampString = "554136456.531708"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "loadMoviesData()"
             landmarkType = "7">
             <Locations>
@@ -682,11 +676,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.427963"
+            timestampString = "554136456.531778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "loadMoviesData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -730,11 +724,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.4283119"
+            timestampString = "554136456.531893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "loadMoviesData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -746,11 +740,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.42839"
+            timestampString = "554136456.531962"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "loadMovies(genres:)"
             landmarkType = "7">
             <Locations>
@@ -794,11 +788,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.428465"
+            timestampString = "554136456.532032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "loadMovies(genres:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -810,11 +804,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.428596"
+            timestampString = "554136456.532101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "loadMovies(genres:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -874,7 +868,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieViewController.swift"
-            timestampString = "553700368.429381"
+            timestampString = "554041057.4794379"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -890,7 +884,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieViewController.swift"
-            timestampString = "553700368.429879"
+            timestampString = "554041057.4794919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -906,11 +900,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.43014"
+            timestampString = "554136456.532267"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "loadMovies(genres:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -938,11 +932,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.430276"
+            timestampString = "554136456.532364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -954,11 +948,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.430338"
+            timestampString = "554136456.532436"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -970,11 +964,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.430397"
+            timestampString = "554136456.532508"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,11 +980,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.430456"
+            timestampString = "554136456.532577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "loadMovies(genres:)"
             landmarkType = "7">
             <Locations>
@@ -1034,11 +1028,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/MovieTableViewController.swift"
-            timestampString = "553700368.430514"
+            timestampString = "554136456.532647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "loadMovies(genres:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1078,7 +1072,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/Api/CoreDataManager.swift"
@@ -1091,14 +1085,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TheMovieHunter.CoreDataManager.getMovies() -&gt; Swift.Array&lt;TheMovieHunter.Movie&gt;"
                   moduleName = "TheMovieHunter"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ws-013-11b/Library/Containers/com.eltima.cmd1.mas/Data/Documents/MyMobileProjects/iOSProjects/Swift/Testing/TheMovieHunter/TheMovieHunter/Api/CoreDataManager.swift"
-                  timestampString = "553695122.590624"
+                  timestampString = "553783315.4164"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -1106,14 +1100,14 @@
                   offsetFromSymbolStart = "32">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "TheMovieHunter.CoreDataManager.getMovies() -&gt; Swift.Array&lt;TheMovieHunter.Movie&gt;"
                   moduleName = "TheMovieHunter"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ws-013-11b/Library/Containers/com.eltima.cmd1.mas/Data/Documents/MyMobileProjects/iOSProjects/Swift/Testing/TheMovieHunter/TheMovieHunter/Api/CoreDataManager.swift"
-                  timestampString = "553695122.592672"
+                  timestampString = "553783315.418527"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -1142,7 +1136,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/Api/UrlManager.swift"
@@ -1158,7 +1152,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/Api/UrlManager.swift"
@@ -1174,7 +1168,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TheMovieHunter/Api/UrlManager.swift"

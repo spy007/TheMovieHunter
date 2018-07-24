@@ -6,8 +6,8 @@ target 'TheMovieHunter' do
 pod 'SwiftyJSON'
 pod 'Alamofire'
 pod 'AlamofireImage'
-pod 'Nuke-Alamofire-Plugin' # optional
-pod 'Nuke-AnimatedImage-Plugin' # optional
 pod 'Realm'
 pod 'RealmSwift'
+pod 'Fabric'
+pod 'Crashlytics'
 end

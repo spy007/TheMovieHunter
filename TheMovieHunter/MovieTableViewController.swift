@@ -26,6 +26,11 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let button = UILabel()
+        button.text = "Seatch settings"
+        self.tableView.tableHeaderView?.addSubview(button)
+        self.navigationController?.view.addSubview(button)
+        
         mng = CoreDataManager()
         
         // Use the edit button item provided by the table view controller.
@@ -47,7 +52,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: Private methods
     
-    func loadMoviesData() {
+    private func loadMoviesData() {
         
         URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
             let jsonDecoder = JSONDecoder()
@@ -64,7 +69,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
             }.resume()
     }
     
-    func loadMovies(genres: [MovieGenre]?) {
+    private func loadMovies(genres: [MovieGenre]?) {
         
         URLSession.shared.dataTask(with: UrlManager.getMoviesUrl()) { (data, response, error) in
             let jsonDecoder = JSONDecoder()
@@ -111,6 +116,10 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     private func showAlert() {
         self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
         self.present(self.loadingMoviesAlert, animated: false, completion: nil)
+    }
+    
+    @objc private func showSearchSettings(button: UIButton) {
+    
     }
     
     // MARK: - Table view data source
@@ -187,6 +196,28 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50.0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let frame: CGRect = tableView.frame
+        
+        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 50))
+        headerView.addSubview(SearchSettingsControl())
+        return headerView
+    }
+    
+    @objc func sliderValueDidChange(_ sender:UISlider!)
+    {
+        print("Slider value changed")
+        
+        // Use this code below only if you want UISlider to snap to values step by step
+        
+        print("Slider step value \(Int(sender.value))")
     }
     
     /*
