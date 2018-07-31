@@ -35,6 +35,14 @@
 		8A9EF26920F34DD500188E69 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9EF26620F34DD500188E69 /* RealmManager.swift */; };
 		8A9EF27320F34F0E00188E69 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9EF27220F34F0E00188E69 /* MovieTableViewCell.swift */; };
 		8A9EF27520F3531100188E69 /* MovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9EF27420F3531000188E69 /* MovieTableViewController.swift */; };
+		8AF9ACA62109F59F00C42B03 /* GenresControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACA52109F59F00C42B03 /* GenresControl.swift */; };
+		8AF9ACA8210B54D500C42B03 /* SearchSettingsControl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACA7210B54D500C42B03 /* SearchSettingsControl1.swift */; };
+		8AF9ACAA210B966200C42B03 /* GenresControl1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACA9210B966200C42B03 /* GenresControl1.swift */; };
+		8AF9ACAE210F23D300C42B03 /* SearchSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACAD210F23D300C42B03 /* SearchSettingsViewController.swift */; };
+		8AF9ACB02110513600C42B03 /* GenreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACAF2110513600C42B03 /* GenreTableViewCell.swift */; };
+		8AF9ACB221106CD100C42B03 /* icon_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB121106CD000C42B03 /* icon_settings.png */; };
+		8AF9ACB42110A65100C42B03 /* icon_settings_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB32110A65000C42B03 /* icon_settings_1x.png */; };
+		8AF9ACB62110AF8100C42B03 /* icon_movie_tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB52110AF8100C42B03 /* icon_movie_tabbar.png */; };
 		A7E007DAF91C96746560C14A /* Pods_TheMovieHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2E04F5C60697228B58389 /* Pods_TheMovieHunter.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +83,14 @@
 		8A9EF26620F34DD500188E69 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		8A9EF27220F34F0E00188E69 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		8A9EF27420F3531000188E69 /* MovieTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewController.swift; sourceTree = "<group>"; };
+		8AF9ACA52109F59F00C42B03 /* GenresControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresControl.swift; sourceTree = "<group>"; };
+		8AF9ACA7210B54D500C42B03 /* SearchSettingsControl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsControl1.swift; sourceTree = "<group>"; };
+		8AF9ACA9210B966200C42B03 /* GenresControl1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresControl1.swift; sourceTree = "<group>"; };
+		8AF9ACAD210F23D300C42B03 /* SearchSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsViewController.swift; sourceTree = "<group>"; };
+		8AF9ACAF2110513600C42B03 /* GenreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreTableViewCell.swift; sourceTree = "<group>"; };
+		8AF9ACB121106CD000C42B03 /* icon_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings.png; sourceTree = "<group>"; };
+		8AF9ACB32110A65000C42B03 /* icon_settings_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_settings_1x.png; sourceTree = "<group>"; };
+		8AF9ACB52110AF8100C42B03 /* icon_movie_tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_movie_tabbar.png; sourceTree = "<group>"; };
 		FFB491E79C592BA978496EE9 /* Pods-TheMovieHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieHunter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +118,9 @@
 		8A1DDBEE2105B9D900657C10 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8AF9ACB52110AF8100C42B03 /* icon_movie_tabbar.png */,
+				8AF9ACB32110A65000C42B03 /* icon_settings_1x.png */,
+				8AF9ACB121106CD000C42B03 /* icon_settings.png */,
 				8A1DDBFB2105FF9C00657C10 /* icon_movie.png */,
 				8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */,
 				8A1DDBF02105B9D900657C10 /* emptyStar.png */,
@@ -120,6 +139,10 @@
 				8A49306C20F8C193007E1E46 /* VoteControl.swift */,
 				8A49306E20FC8BCE007E1E46 /* LoadingAlert.swift */,
 				8A1DDC1F2107524100657C10 /* SearchSettingsControl.swift */,
+				8AF9ACA7210B54D500C42B03 /* SearchSettingsControl1.swift */,
+				8AF9ACA52109F59F00C42B03 /* GenresControl.swift */,
+				8AF9ACA9210B966200C42B03 /* GenresControl1.swift */,
+				8AF9ACAF2110513600C42B03 /* GenreTableViewCell.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -155,6 +178,7 @@
 				8A9EF27220F34F0E00188E69 /* MovieTableViewCell.swift */,
 				8A9EF27420F3531000188E69 /* MovieTableViewController.swift */,
 				8A9EF25420F34C6300188E69 /* MovieViewController.swift */,
+				8AF9ACAD210F23D300C42B03 /* SearchSettingsViewController.swift */,
 				8A9EF25620F34C6300188E69 /* Main.storyboard */,
 				8A9EF25920F34C6400188E69 /* Assets.xcassets */,
 				8A9EF25B20F34C6400188E69 /* LaunchScreen.storyboard */,
@@ -257,16 +281,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A1DDBF52105B9DA00657C10 /* defaultPhoto.png in Resources */,
+				8AF9ACB221106CD100C42B03 /* icon_settings.png in Resources */,
 				8A1DDBF82105B9DA00657C10 /* highlightedStar.png in Resources */,
 				8A1DDBF62105B9DA00657C10 /* emptyStar.png in Resources */,
 				8A9EF25D20F34C6400188E69 /* LaunchScreen.storyboard in Resources */,
 				8A4930AD2100C2BC007E1E46 /* Localizable.strings in Resources */,
 				8A9EF25A20F34C6400188E69 /* Assets.xcassets in Resources */,
 				8A1DDBFA2105B9DA00657C10 /* person_count.png in Resources */,
+				8AF9ACB42110A65100C42B03 /* icon_settings_1x.png in Resources */,
 				8A1DDBF92105B9DA00657C10 /* logo_movie.jpg in Resources */,
 				8A1DDBF72105B9DA00657C10 /* filledStar.png in Resources */,
 				8A9EF25820F34C6300188E69 /* Main.storyboard in Resources */,
 				8A1DDBFC2105FF9D00657C10 /* icon_movie.png in Resources */,
+				8AF9ACB62110AF8100C42B03 /* icon_movie_tabbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,8 +365,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A9EF27520F3531100188E69 /* MovieTableViewController.swift in Sources */,
+				8AF9ACAA210B966200C42B03 /* GenresControl1.swift in Sources */,
 				8A49309C20FE1E4E007E1E46 /* TheMovieHunter.xcdatamodeld in Sources */,
 				8A225A1A20F6132B008D027D /* MoviesJson.swift in Sources */,
+				8AF9ACA62109F59F00C42B03 /* GenresControl.swift in Sources */,
+				8AF9ACA8210B54D500C42B03 /* SearchSettingsControl1.swift in Sources */,
 				8A9EF27320F34F0E00188E69 /* MovieTableViewCell.swift in Sources */,
 				8A9EF25520F34C6300188E69 /* MovieViewController.swift in Sources */,
 				8A49306F20FC8BCF007E1E46 /* LoadingAlert.swift in Sources */,
@@ -348,8 +378,10 @@
 				8A9EF26920F34DD500188E69 /* RealmManager.swift in Sources */,
 				8A4930A82100ABAD007E1E46 /* UrlManager.swift in Sources */,
 				8A4930A620FF7981007E1E46 /* Utils.swift in Sources */,
+				8AF9ACAE210F23D300C42B03 /* SearchSettingsViewController.swift in Sources */,
 				8A4930A220FF31CB007E1E46 /* MovieGenre.swift in Sources */,
 				8A4930A020FF2974007E1E46 /* GenresJson.swift in Sources */,
+				8AF9ACB02110513600C42B03 /* GenreTableViewCell.swift in Sources */,
 				8A9EF25320F34C6300188E69 /* AppDelegate.swift in Sources */,
 				8A49306D20F8C193007E1E46 /* VoteControl.swift in Sources */,
 				8A4930A420FF5126007E1E46 /* CoreDataManager.swift in Sources */,

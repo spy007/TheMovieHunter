@@ -90,6 +90,18 @@ class CoreDataManager {
         }
     }
     
+    func getGenres() -> [Genre]? {
+        var genresDb: [Genre]? = nil
+        
+        do {
+            genresDb = (try context?.fetch(Genre.fetchRequest()))!
+        } catch {
+            print("Failed to fetch genres from Core Data")
+        }
+        
+        return genresDb
+    }
+    
     func deleteAllData(entityName: String)
     {
         // Create Fetch Request

@@ -15,7 +15,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
     //MARK: Properties
     
-    var loadingMoviesAlert: UIAlertController! = nil
+    var loadingMoviesAlert: UIAlertController? = nil
     @IBOutlet weak var searchBar: UISearchBar!
     
     var searchActive : Bool = false
@@ -23,18 +23,27 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     var movies: [Movie] = []
     var mng: CoreDataManager? = nil
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        // Initialize Tab Bar Item
+        tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "icon_movie_tabbar"), tag: 0)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let button = UILabel()
-        button.text = "Seatch settings"
-        self.tableView.tableHeaderView?.addSubview(button)
-        self.navigationController?.view.addSubview(button)
         
         mng = CoreDataManager()
         
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        // 1
+        //        let rightAddBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MovieTableViewController.addTapped))
+        
+        //        let rightSearchBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(MovieTableViewController.searchTapped))
+        //        self.navigationItem.setRightBarButtonItems([rightSearchBarButtonItem], animated: true)
+        
         
         showAlert()
         
@@ -83,7 +92,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                     
                     self.movies = (self.mng?.getMovies())!
                     
-                    self.loadingMoviesAlert.dismiss(animated: true, completion: nil)
+                    self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
+                    
+                    self.setTabBarBadge()
                     
                     self.tableView.reloadData()
                 }
@@ -107,7 +118,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
             //                        }
             //
             //                        self.tableView.reloadData()
-            //                    })
+            //                    }).
             //                }
             //            })
             }.resume()
@@ -115,11 +126,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
     private func showAlert() {
         self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
-        self.present(self.loadingMoviesAlert, animated: false, completion: nil)
-    }
-    
-    @objc private func showSearchSettings(button: UIButton) {
-    
+        self.present(self.loadingMoviesAlert!, animated: false, completion: nil)
     }
     
     // MARK: - Table view data source
@@ -198,28 +205,23 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let frame: CGRect = tableView.frame
-        
-        let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: 50))
-        headerView.addSubview(SearchSettingsControl())
-        return headerView
-    }
-    
-    @objc func sliderValueDidChange(_ sender:UISlider!)
-    {
-        print("Slider value changed")
-        
-        // Use this code below only if you want UISlider to snap to values step by step
-        
-        print("Slider step value \(Int(sender.value))")
-    }
-    
+    // Try create header in list later
+    /*
+     
+     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+     return Constants.searchSettingsHeight
+     }
+     
+     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+     
+     let frame: CGRect = tableView.frame
+     
+     let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: Constants.searchSettingsHeight))
+     
+     headerView.addSubview(SearchSettingsControl())
+     return headerView
+     }
+     */
     /*
      // Override to support rearranging the table view.
      override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -245,6 +247,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
             
         case "AddItem":
             os_log("Adding a new movie.", log: OSLog.default, type: .debug)
+            
+        case "Show":
+            print("Show")
             
         case "ShowDetail":
             guard let movieDetailViewController = segue.destination as? MovieViewController else {
@@ -333,4 +338,19 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    @objc func searchTapped(sender:UIButton) {
+        print("search pressed")
+    }
+    
+    @objc func addTapped (sender:UIButton) {
+        print("add pressed")
+    }
+    
+    private func setTabBarBadge() {
+        // Configure Tab Bar Item
+        let count = self.movies.count
+        if count > 0 {
+            self.tabBarItem.badgeValue = "\(count)"
+        }
+    }
 }

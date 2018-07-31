@@ -9,54 +9,78 @@
 import Foundation
 import UIKit
 
-class SearchSettingsControl: UIStackView {
+@IBDesignable class SearchSettingsControl: UIStackView {
     
     // MARK: Properties
+    var sliderLabel: UILabel? = nil
+    private let minMovieYear: Float = 1902
+    private let maxMovieYear = Float(Calendar.current.component(.year, from: Date())) // current year
     
-    private var sliderLabel = UILabel()
-    
-    //MARK: Initialization
+    // MARK: Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setControl()
+        //        translatesAutoresizingMaskIntoConstraints = false
+        //        heightAnchor.constraint(equalToConstant: CGFloat(sliderBarHeight)).isActive = true
+        //        super.init(frame:CGRect(x: 0, y: 0, width: sliderWidth, height: sliderBarHeight))
+        setupSettings()
     }
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        setControl()
+        setupSettings()
     }
     
     // MARK: Private methods
     
-    private func getSlider() -> UISlider {
-        let slider = UISlider(frame:CGRect(x: 0, y: 25, width: 300, height: 20))
-        slider.minimumValue = 1902
-        slider.maximumValue = Float(Calendar.current.component(.year, from: Date())) // current year
-        slider.isContinuous = true
-        slider.tintColor = UIColor.green
-        slider.addTarget(self, action: #selector(MovieTableViewController.sliderValueDidChange(_:)), for: .valueChanged)
+    private func getSliderLabel() -> UILabel {
+        let label = UILabel()
+        label.text = "\(Int(maxMovieYear))"
+        label.textAlignment = .center
         
+        return label
+    }
+    
+    public func getSlider() -> UISlider {
+        let slider = UISlider()
+        slider.minimumValue = minMovieYear
+        slider.maximumValue = maxMovieYear
+        slider.setValue(maxMovieYear, animated: true)
+        slider.isContinuous = true
+        //        slider.tintColor = UIColor.green
+        slider.addTarget(self, action: #selector(SearchSettingsControl.sliderValueDidChange(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
         return slider
     }
     
     @objc func sliderValueDidChange(_ sender:UISlider!) {
-        print("Slider value changed")
-        
-        // Use this code below only if you want UISlider to snap to values step by step
-        
-        print("Slider step value \(Int(sender.value))")
+        let val = "\(Int(sender.value))"
+        print("Slider val: " + val)
+        sliderLabel?.text = val
     }
     
-    private func setControl() {
+    @objc func sliderDidEndSliding(_ sender:UISlider!) {
+        let val = "\(Int(sender.value))"
+        print("Slider touch up: " + val)
+        sliderLabel?.text = val
+    }
+    
+    public func getSliderBar() -> UIStackView {
         
         let sliderStack = UIStackView()
         sliderStack.axis = .vertical
-        sliderStack.spacing = 2
-        sliderStack.addArrangedSubview(sliderLabel)
+        sliderLabel = getSliderLabel()
+        sliderStack.addArrangedSubview(sliderLabel!)
         sliderStack.addArrangedSubview(getSlider())
         
-        addArrangedSubview(sliderLabel)
+        return sliderStack
     }
+    
+    private func setupSettings() {
+//        addArrangedSubview(getSliderBar())
+        addArrangedSubview(GenresControl())
+        
+    }
+    
     
 }

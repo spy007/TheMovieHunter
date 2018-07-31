@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct Constants {
     
@@ -18,8 +19,16 @@ public struct Constants {
     public static let imageStarFilled = "filledStar"
     public static let imageStarHighlighted = "highlightedStar"
     
+    // sized
     public static let imageStarSize = 44.0
+    public static let labelGenresWidth: CGFloat = 100
+    public static let pickerGenresWidth: CGFloat = 50
+    public static let pickerGenresHeight: CGFloat = 50
+    public static let searchSettingsHeight: CGFloat = 130
     
     // messages
     public static let alertLoadingMovies = "Loading movies ..."
+    
+    // labels
+    public static let labelGenres = "Genres: "
 }
