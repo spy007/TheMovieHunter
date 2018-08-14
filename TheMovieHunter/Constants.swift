@@ -26,9 +26,18 @@ public struct Constants {
     public static let pickerGenresHeight: CGFloat = 50
     public static let searchSettingsHeight: CGFloat = 130
     
+    // Core Data
+    // Entity GenreSelected attribute names
+    public static let attribute_selected = "selected"
+    
     // messages
     public static let alertLoadingMovies = "Loading movies ..."
     
     // labels
     public static let labelGenres = "Genres: "
+    
+    public static let minMovieYear = 1902.0
+    
+    // other
+    public static let actionId = 28
 }

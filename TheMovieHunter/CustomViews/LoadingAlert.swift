@@ -25,4 +25,11 @@ class LoadingAlert {
         
         return alertController
     }
+    
+    /* How to use
+     private func showAlert() {
+     self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
+     self.present(self.loadingMoviesAlert!, animated: false, completion: nil)
+     }
+     */
 }

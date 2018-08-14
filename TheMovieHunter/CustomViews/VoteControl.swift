@@ -55,7 +55,7 @@ import UIKit
         let filledStar = UIImage(named: Constants.imageStarFilled, in: bundle, compatibleWith: self.traitCollection)
         let highlightedStar = UIImage(named:Constants.imageStarHighlighted, in: bundle, compatibleWith: self.traitCollection)
         
-        let voteAve = voteAverage / 2 // because there are 5 stars but vote can be 10
+        let voteAve = voteAverage // because there are 5 stars but vote can be 10
         for stars in 0..<Constants.starsCount {
             // Create the button
             let button = UIButton()

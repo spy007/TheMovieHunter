@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MovieGenre: Decodable {
+class MovieGenreResponse: Decodable {
     
     var id: Int?
     var name: String?

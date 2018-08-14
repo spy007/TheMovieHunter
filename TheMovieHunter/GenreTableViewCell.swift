@@ -13,8 +13,6 @@ class GenreTableViewCell: UITableViewCell {
     @IBOutlet weak var labelGenre: UILabel!
     @IBOutlet weak var switchGenre: UISwitch!
     
-    var genre: Genre? = nil
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -22,15 +20,5 @@ class GenreTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    @objc func onSwitchValueChanged(_ switchView: UISwitch) {
-        print("switch changed")
-
-        if let genre = genre {
-            genre.selected = switchView.isOn
-
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        }
     }
 }

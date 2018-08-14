@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import SwiftRangeSlider
 
 class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var labelYearOfMovie: UILabel!
+    @IBOutlet weak var lyOfMov: UILabel! // lower year of movies
+    @IBOutlet weak var uyOfMov: UILabel! // upper year of movies
+    @IBOutlet weak var rangeSlider: RangeSlider!
     
-    @IBOutlet weak var sliderYearOfMovie: UISlider!
-    
-    var genres: [Genre]? = []
-    private let minMovieYear: Float = 1902
-    private let maxMovieYear = Float(Calendar.current.component(.year, from: Date()))
+    private var genres: [Genre]? = []
+    private var genresSelectedDict = [Int:GenreSelected]()
+    private var lowerValue: Double? = nil
+    private var mng: CoreDataManager? = nil
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -31,10 +33,15 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         
         tableView.dataSource = self
         
-        genres = CoreDataManager().getGenres()
+        mng = CoreDataManager()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        genres = mng?.getGenres()
         
-        labelYearOfMovie.text = "\(Int(maxMovieYear))"
-        setSlider()
+        genresSelectedDict = (mng?.getGenresSelectedDict())!
+        
+        setRangeSlider()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,35 +61,45 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! GenreTableViewCell
         
         let genre = genres?[indexPath.row]
-        cell.genre = genre
         
         cell.labelGenre.text = genre?.name
+        
+        setSwitchView(sw: cell.switchGenre, id: (genre?.id)!)
         
         return cell
     }
     
-    private func setSlider() {
-        if let slider = sliderYearOfMovie {
-            slider.minimumValue = minMovieYear
-            slider.maximumValue = maxMovieYear
-            slider.setValue(maxMovieYear, animated: true)
-            slider.isContinuous = true
-            slider.tintColor = UIColor.green
-            slider.addTarget(self, action: #selector(SearchSettingsControl.sliderValueDidChange(_:)), for: .valueChanged)
-            slider.addTarget(self, action: #selector(sliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
+    // MARK: Private methods
+    
+    private func setSwitchView(sw: UISwitch, id: String) {
+        
+        if let id = Int(id) {
+            sw.tag = id
+            sw.isOn = (genresSelectedDict[id]?.selected)!
         }
+        
+        sw.addTarget(self, action: #selector(onSwitchValueChanged(_:)), for: .valueChanged)
     }
     
-    @objc func sliderValueDidChange(_ sender:UISlider!) {
-        let val = "\(Int(sender.value))"
-        print("Slider val: " + val)
-        labelYearOfMovie?.text = val
-    }
-    
-    @objc func sliderDidEndSliding(_ sender:UISlider!) {
-        let val = "\(Int(sender.value))"
-        print("Slider touch up: " + val)
-        labelYearOfMovie?.text = val
+    private func setRangeSlider() {
+        let range = Defaults.getMovieYearsRange()
+        let min = range.0 // sets wrong lower value if set value which differs from range.0
+        let max = range.1
+        lowerValue = min
+        
+        // init RangeSlider view, found it needs to init both maximumValue and upperValue
+//        rangeSlider.minimumValue = min
+        rangeSlider.lowerValue = min
+        rangeSlider.maximumValue = max
+        rangeSlider.upperValue = max
+        
+        // init labels under RangeSlider with year
+        lyOfMov.text = MovieYearUtils.getMinYearOfMovies(userSelectedMinYearOfMovies: min)
+        uyOfMov.text = MovieYearUtils.getMaxYearOfMovies(userSelectedMaxYearOfMovies: max)
+        
+        rangeSlider.tintColor = UIColor.green
+        rangeSlider.addTarget(self, action: #selector(rangeSliderValueDidChange(_:)), for: .valueChanged)
+        rangeSlider.addTarget(self, action: #selector(rangeSliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
     }
     
     /*
@@ -94,4 +111,29 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
      // Pass the selected object to the new view controller.
      }
      */
+    
+    @objc func onSwitchValueChanged(_ switchView: UISwitch) {
+        print("switch changed witch tag \(switchView.tag)")
+        
+        mng?.saveSelectedGenre(genreSelected: genresSelectedDict[switchView.tag], isSelected: switchView.isOn)
+    }
+    
+    @objc func rangeSliderValueDidChange(_ slider:RangeSlider!) {
+        let lv = rangeSlider.lowerValue
+        let uv = rangeSlider.upperValue
+        
+        if self.lowerValue != lv {
+            self.lowerValue = lv
+            lyOfMov.text = MovieYearUtils.getMinYearOfMovies(userSelectedMinYearOfMovies: lv)
+        } else {
+            uyOfMov.text = MovieYearUtils.getMaxYearOfMovies(userSelectedMaxYearOfMovies: uv)
+        }
+    }
+    
+    @objc func rangeSliderDidEndSliding(_ rangeSlider:RangeSlider!) {
+        let lv = rangeSlider.lowerValue
+        let uv = rangeSlider.upperValue
+        
+        Defaults.setMovieYearsRange(movieYear: (lv, uv))
+    }
 }

@@ -17,7 +17,7 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var labelMovieTitle: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     @IBOutlet weak var ratingControl: VoteControl!
-    @IBOutlet weak var labelOverview: UILabel!
+    @IBOutlet weak var labelOverview: UITextView!
     @IBOutlet weak var labelVoteCount: UILabel!
     @IBOutlet weak var labelPopularity: UILabel!
     @IBOutlet weak var labelCaptionReleaseDate: UILabel!
@@ -40,10 +40,6 @@ class MovieViewController: UIViewController {
                 movieImageView.af_setImage(withURL: UrlManager.getImageUrl(imgPath: image_path))
             }
             
-            if let vote = Int((movie.vote_average)/2) as Int? {
-                ratingControl.voteAverage = vote
-            }
-            
             labelOverview.text = movie.overview
             
             if let voteCount = movie.vote_count {
@@ -55,7 +51,8 @@ class MovieViewController: UIViewController {
             
             labelReleaseDate.text = movie.release_date
             
-            labelGenres.text = movie.genres
+//            labelGenres.sizeToFit()
+            labelGenres.text = CoreDataManager().getGenreNamesSequence(movie: movie)
         }
     }
     

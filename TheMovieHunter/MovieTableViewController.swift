@@ -23,15 +23,24 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     var movies: [Movie] = []
     var mng: CoreDataManager? = nil
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        // Initialize Tab Bar Item
-        tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "icon_movie_tabbar"), tag: 0)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("++++  viewDidLoad()")
+        
+        viewWillAppear(false)
+    }
+    
+    override func viewDidAppear(_ animation: Bool) {
+        super.viewDidAppear(animation)
+        
+        print("viewWillAppear: ")
+    }
+    
+    override func viewWillAppear(_ animation: Bool) {
+        super.viewWillAppear(animation)
+        
+        //        showAlert()
         
         mng = CoreDataManager()
         
@@ -43,9 +52,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         
         //        let rightSearchBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(MovieTableViewController.searchTapped))
         //        self.navigationItem.setRightBarButtonItems([rightSearchBarButtonItem], animated: true)
-        
-        
-        showAlert()
         
         // load from server
         loadMoviesData()
@@ -64,64 +70,52 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     private func loadMoviesData() {
         
         URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
-            let jsonDecoder = JSONDecoder()
-            let genresJson = try? jsonDecoder.decode(GenresJson.self, from: data!)
-            
-            if let genres = genresJson?.genres {
-                DispatchQueue.main.async {
-                    self.mng?.deleteAllData(entityName: String(describing: Genre.self))
-                    self.mng?.save(navigationController: self.navigationController, movieGenres: genres)
-                    
-                    self.loadMovies(genres: genres)
+            if let mng = self.mng {
+                let jsonDecoder = JSONDecoder()
+                let genresJson = try? jsonDecoder.decode(GenresJson.self, from: data!)
+                
+                if let genres = genresJson?.genres {
+                    DispatchQueue.main.async {
+                        mng.deleteAllData(entity: String(describing: Genre.self))
+                        mng.save(genresResponse: genres)
+                        mng.saveSelectedGenres()
+                        self.loadMovies(genres: genres)
+                    }
                 }
             }
             }.resume()
     }
     
-    private func loadMovies(genres: [MovieGenre]?) {
+    private func loadMovies(genres: [MovieGenreResponse]?) {
+        self.mng?.deleteAllData(entity: String(describing: Movie.self))
         
-        URLSession.shared.dataTask(with: UrlManager.getMoviesUrl()) { (data, response, error) in
-            let jsonDecoder = JSONDecoder()
-            let responseModel = try? jsonDecoder.decode(MoviesJson.self, from: data!)
+        let moviesYearRange = Defaults.getMovieYearsRange()
+        let maxYear = Int(moviesYearRange.1)
+        let minYear = Int(moviesYearRange.0)
+        
+        for y in minYear...maxYear {
             
-            if let movieResults = responseModel!.results {
+            URLSession.shared.dataTask(with: UrlManager.getMoviesUrlByYear(year: Int(Constants.minMovieYear)+y)) { (data, response, error) in
+                let jsonDecoder = JSONDecoder()
                 
-                DispatchQueue.main.async {
-                    self.mng?.deleteAllData(entityName: String(describing: Movie.self))
-                    self.mng?.save(navigationController: self.navigationController, movieResults: movieResults, genres: genres)
+                let responseModel = try? jsonDecoder.decode(MoviesJson.self, from: data!)
+                
+                if let movieResults = responseModel!.results {
                     
-                    self.movies = (self.mng?.getMovies())!
-                    
-                    self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
-                    
-                    self.setTabBarBadge()
-                    
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.mng?.deleteAllData(entity: String(describing: GenreId.self))
+                        self.mng?.deleteAllData(entity: String(describing: Movie.self))
+                        self.mng?.save(movieResults: movieResults, genres: genres)
+                        
+                        self.movies = (self.mng?.getMovies())!
+                        self.tableView.reloadData()
+                        //                    self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
+                        self.setTabBarBadge()
+                    }
                 }
-            }
-            // TODO: it commented because it fails to save in realm because of problems with id:
-            // https://stackoverflow.com/a/26152634/1931613
-            // 'RLMException', reason: 'Primary key property 'id' does not exist on object 'MovieResults''
-            // even if defined primaryKey() as it said to do according to above link
-            
-            //            RealmManager.addOrUpdate(model: Constants.model, object: responseModel, completionHandler: { (error) in
-            //                if let err = error {
-            //                    print("Error \(err.localizedDescription)")
-            //                } else {
-            //                    RealmManager.fetch(model: Constants.model, condition: nil, completionHandler: { (result) in
-            //
-            //                        for m in result {
-            //                            if let movie = m as? MovieResults {
-            //                                self.movies.append(movie)
-            //                                print(movie.id)
-            //                            }
-            //                        }
-            //
-            //                        self.tableView.reloadData()
-            //                    }).
-            //                }
-            //            })
-            }.resume()
+                
+                }.resume()
+        }
     }
     
     private func showAlert() {
@@ -353,4 +347,5 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
             self.tabBarItem.badgeValue = "\(count)"
         }
     }
+    
 }

@@ -10,31 +10,21 @@ import Foundation
 
 class Utils {
     
-    class func getGenresByIds(idsArr: [Int]?, dictGenres: [Int:String]) -> String {
-        var genres = ""
+    func doubleToInteger(data:Double)-> Int {
+        let doubleToString = "\(data)"
+        let stringToInteger = (doubleToString as NSString).integerValue
         
-        if let ids = idsArr {
-            var idx = 0
-            for id in ids {
-                if (idx > 0) {
-                    genres += ", "
-                }
-                genres += dictGenres[id]!
-                idx += 1
-            }
-        }
-        
-        return genres
+        return stringToInteger
     }
     
-    class func getGenresDict(genres: [MovieGenre]?) -> [Int: String] {
-
-        var dictGenres = [Int: String]()
-        
-        for genre in genres! {
-            dictGenres.updateValue((genre.name)!, forKey: (genre.id)!)
-        }
-        
-        return dictGenres
+    class func stringToDate(date: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: date)
+    }
+    
+    class func utcDateToDate(utcDate: String) -> String {
+        let end = utcDate.index(utcDate.startIndex, offsetBy: utcDate.count - " UTC".count)
+        return String(utcDate[utcDate.startIndex..<end])
     }
 }

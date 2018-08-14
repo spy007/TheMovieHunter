@@ -10,4 +10,5 @@ pod 'Realm'
 pod 'RealmSwift'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'SwiftRangeSlider'
 end

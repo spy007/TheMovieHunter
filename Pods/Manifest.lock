@@ -10,6 +10,7 @@ PODS:
   - Realm/Headers (3.7.5)
   - RealmSwift (3.7.5):
     - Realm (= 3.7.5)
+  - SwiftRangeSlider (2.0.0)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Fabric
   - Realm
   - RealmSwift
+  - SwiftRangeSlider
   - SwiftyJSON
 
 SPEC REPOS:
@@ -29,6 +31,7 @@ SPEC REPOS:
     - Fabric
     - Realm
     - RealmSwift
+    - SwiftRangeSlider
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -38,8 +41,9 @@ SPEC CHECKSUMS:
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
   Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
   RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
+  SwiftRangeSlider: f86e3b637c961120158fa1a89277c8343845cbe4
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 44e85c664659197599b74a8779d1f1fb71c27dc6
+PODFILE CHECKSUM: 60d322d12465d203fb9a2a7c6f75967e85b8a800
 
 COCOAPODS: 1.5.3

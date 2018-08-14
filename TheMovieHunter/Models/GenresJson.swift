@@ -9,5 +9,5 @@
 import Foundation
 
 class GenresJson: Decodable {
-    var genres: [MovieGenre]? = nil
+    var genres: [MovieGenreResponse]? = nil
 }
