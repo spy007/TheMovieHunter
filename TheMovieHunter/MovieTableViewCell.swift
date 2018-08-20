@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireImage
 
 class MovieTableViewCell: UITableViewCell {
+
     
     @IBOutlet weak var labelMovie: UILabel!
     
