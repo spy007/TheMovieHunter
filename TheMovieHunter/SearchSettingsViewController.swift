@@ -21,27 +21,24 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     private var lowerValue: Double? = nil
     private var mng: CoreDataManager? = nil
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        // Initialize Tab Bar Item
-        tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "icon_settings_1x"), tag: 1)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
+        self.tableView.dataSource = self
         
-        mng = CoreDataManager()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        genres = mng?.getGenres()
-        
-        genresSelectedDict = (mng?.getGenresSelectedDict())!
-        
-        setRangeSlider()
+        Utils.getPrivateContext().perform {
+            
+            self.mng = CoreDataManager()
+            
+            self.genres = self.mng?.getGenres()
+            
+            self.genresSelectedDict = (self.mng?.getGenresSelectedDict())!
+            
+            // Initialize Tab Bar Item
+            self.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "icon_settings_1x"), tag: 1)
+            
+            self.setRangeSlider()
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,7 +85,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         lowerValue = min
         
         // init RangeSlider view, found it needs to init both maximumValue and upperValue
-//        rangeSlider.minimumValue = min
+        //        rangeSlider.minimumValue = min
         rangeSlider.lowerValue = min
         rangeSlider.maximumValue = max
         rangeSlider.upperValue = max
@@ -114,8 +111,9 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     
     @objc func onSwitchValueChanged(_ switchView: UISwitch) {
         print("switch changed witch tag \(switchView.tag)")
-        
-        mng?.saveSelectedGenre(genreSelected: genresSelectedDict[switchView.tag], isSelected: switchView.isOn)
+        Utils.getPrivateContext().perform {
+            self.mng?.saveSelectedGenre(genreSelected: self.genresSelectedDict[switchView.tag], isSelected: switchView.isOn)
+        }
     }
     
     @objc func rangeSliderValueDidChange(_ slider:RangeSlider!) {

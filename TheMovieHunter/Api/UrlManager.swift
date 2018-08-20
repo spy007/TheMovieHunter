@@ -16,6 +16,8 @@ class UrlManager {
     public static let genre_list = "/genre/movie/list"
     public static let guest_session = "/authentication/guest_session/new"
     public static let api_key = "api_key=8a804ccd6e2b680e77ab60f86dc27bb6"
+    public static let token = "/authentication/token/new"
+    public static let validate_with_login = "/authentication/token/validate_with_login"
     
     class func getImageUrl(imgPath: String) -> URL {
         return URL(string: base_image_url + imgPath)!
@@ -31,5 +33,13 @@ class UrlManager {
     
     class func getGuestSession() -> URL {
         return URL(string: base_url + guest_session + "?" + api_key)!
+    }
+    
+    class func getToken() -> URL {
+        return URL(string: base_url + token + "?" + api_key)!
+    }
+    
+    class func getValidateWithLogin() -> String {
+        return base_url + validate_with_login + "?" + api_key
     }
 }

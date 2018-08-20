@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
 class Utils {
     
@@ -26,5 +28,17 @@ class Utils {
     class func utcDateToDate(utcDate: String) -> String {
         let end = utcDate.index(utcDate.startIndex, offsetBy: utcDate.count - " UTC".count)
         return String(utcDate[utcDate.startIndex..<end])
+    }
+    
+    /* It allows to run code in background */
+    class func getPrivateContext() -> NSManagedObjectContext {
+        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateContext.persistentStoreCoordinator = getContext().persistentStoreCoordinator
+        
+        return privateContext
+    }
+    
+    class func getContext() -> NSManagedObjectContext {
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
 }

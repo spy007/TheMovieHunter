@@ -15,12 +15,12 @@ class CoreDataManager {
     var context: NSManagedObjectContext?
     
     init() {
-        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context = Utils.getContext()
     }
     
     // MARK: Movies
     
-    func save(movieResults: [MovieResults]?, genres: [MovieGenreResponse]?) {
+    func save(movieResults: [MovieResults]?) {
         //        DispatchQueue.global(qos: .userInitiated).async {
         var movies: [Movie] = []
         let userIds = getUserSelectedGenreIds()
@@ -179,10 +179,9 @@ class CoreDataManager {
     }
     
     func deleteAllData(entity: String) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
+        let managedContext = Utils.getContext()
         
         do
         {

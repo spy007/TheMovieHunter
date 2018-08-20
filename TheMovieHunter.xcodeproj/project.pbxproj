@@ -17,6 +17,7 @@
 		8A225A1A20F6132B008D027D /* MoviesJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A225A1820F6132B008D027D /* MoviesJson.swift */; };
 		8A225A1B20F6132B008D027D /* MovieResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A225A1920F6132B008D027D /* MovieResults.swift */; };
 		8A435D172123259300541973 /* MoviesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A435D162123259300541973 /* MoviesTabBarController.swift */; };
+		8A435D1921240E5300541973 /* TokenJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A435D1821240E5300541973 /* TokenJson.swift */; };
 		8A49306B20F8A99B007E1E46 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A49306A20F8A99B007E1E46 /* Constants.swift */; };
 		8A49306D20F8C193007E1E46 /* VoteControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A49306C20F8C193007E1E46 /* VoteControl.swift */; };
 		8A49306F20FC8BCF007E1E46 /* LoadingAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A49306E20FC8BCE007E1E46 /* LoadingAlert.swift */; };
@@ -63,6 +64,7 @@
 		8A225A1820F6132B008D027D /* MoviesJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesJson.swift; sourceTree = "<group>"; };
 		8A225A1920F6132B008D027D /* MovieResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResults.swift; sourceTree = "<group>"; };
 		8A435D162123259300541973 /* MoviesTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTabBarController.swift; sourceTree = "<group>"; };
+		8A435D1821240E5300541973 /* TokenJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenJson.swift; sourceTree = "<group>"; };
 		8A49306A20F8A99B007E1E46 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8A49306C20F8C193007E1E46 /* VoteControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VoteControl.swift; path = TheMovieHunter/CustomViews/VoteControl.swift; sourceTree = SOURCE_ROOT; };
 		8A49306E20FC8BCE007E1E46 /* LoadingAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAlert.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				8A225A1920F6132B008D027D /* MovieResults.swift */,
 				8A49309F20FF2974007E1E46 /* GenresJson.swift */,
 				8A98A3E8211DD9C200B4039F /* GuestSessionJson.swift */,
+				8A435D1821240E5300541973 /* TokenJson.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				8AF9ACA62109F59F00C42B03 /* GenresControl.swift in Sources */,
 				8A9EF27320F34F0E00188E69 /* MovieTableViewCell.swift in Sources */,
 				8A9EF25520F34C6300188E69 /* MovieViewController.swift in Sources */,
+				8A435D1921240E5300541973 /* TokenJson.swift in Sources */,
 				8A49306F20FC8BCF007E1E46 /* LoadingAlert.swift in Sources */,
 				8A225A1B20F6132B008D027D /* MovieResults.swift in Sources */,
 				8A9EF26920F34DD500188E69 /* RealmManager.swift in Sources */,

@@ -40,4 +40,6 @@ public struct Constants {
     
     // other
     public static let actionId = 28
+    public static let login = "kirill.ivanou"
+    public static let password = "Test1"
 }

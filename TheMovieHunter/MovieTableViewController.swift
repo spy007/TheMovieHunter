@@ -8,8 +8,6 @@
 
 import UIKit
 import os.log
-import Realm
-import RealmSwift
 
 class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
@@ -26,38 +24,20 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("++++  viewDidLoad()")
+        //        showAlert()
         
-        viewWillAppear(false)
-    }
-    
-    override func viewDidAppear(_ animation: Bool) {
-        super.viewDidAppear(animation)
+        // Setup delegates
+        searchBar.delegate = self
         
-        print("viewWillAppear: ")
+        mng = CoreDataManager()
     }
     
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-        
-        //        showAlert()
-        
-        mng = CoreDataManager()
-        
-        // Use the edit button item provided by the table view controller.
-        navigationItem.leftBarButtonItem = editButtonItem
-        
-        // 1
-        //        let rightAddBarButtonItem:UIBarButtonItem = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MovieTableViewController.addTapped))
-        
-        //        let rightSearchBarButtonItem:UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target: self, action: #selector(MovieTableViewController.searchTapped))
-        //        self.navigationItem.setRightBarButtonItems([rightSearchBarButtonItem], animated: true)
-        
-        // load from server
-        loadMoviesData()
-        
-        // Setup delegates
-        searchBar.delegate = self
+
+        Utils.getPrivateContext().perform {
+            self.loadMoviesData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,18 +55,19 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                 let genresJson = try? jsonDecoder.decode(GenresJson.self, from: data!)
                 
                 if let genres = genresJson?.genres {
-                    DispatchQueue.main.async {
-                        mng.deleteAllData(entity: String(describing: Genre.self))
-                        mng.save(genresResponse: genres)
-                        mng.saveSelectedGenres()
-                        self.loadMovies(genres: genres)
-                    }
+                    // Code in here is now running "in the background" and can safely
+                    // do anything in privateContext.
+                    // This is where you will create your entities and save them.
+                    mng.deleteAllData(entity: String(describing: Genre.self))
+                    mng.save(genresResponse: genres)
+                    mng.saveSelectedGenres()
+                    self.loadMovies()
                 }
             }
             }.resume()
     }
     
-    private func loadMovies(genres: [MovieGenreResponse]?) {
+    private func loadMovies() {
         self.mng?.deleteAllData(entity: String(describing: Movie.self))
         
         let moviesYearRange = Defaults.getMovieYearsRange()
@@ -101,15 +82,12 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                 let responseModel = try? jsonDecoder.decode(MoviesJson.self, from: data!)
                 
                 if let movieResults = responseModel!.results {
+                    self.mng?.save(movieResults: movieResults)
                     
+                    self.movies = (self.mng?.getMovies())!
                     DispatchQueue.main.async {
-                        self.mng?.deleteAllData(entity: String(describing: GenreId.self))
-                        self.mng?.deleteAllData(entity: String(describing: Movie.self))
-                        self.mng?.save(movieResults: movieResults, genres: genres)
-                        
-                        self.movies = (self.mng?.getMovies())!
                         self.tableView.reloadData()
-                        //                    self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
+                        // self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
                         self.setTabBarBadge()
                     }
                 }
@@ -147,19 +125,22 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
         var movie: Movie?
-        if (searchActive) {
-            movie = filtered[indexPath.row]
-        }
-        else {
-            movie = movies[indexPath.row]
-        }
-        if movie != nil {
-            cell.labelMovie.text = movie?.title
-            // set image by url async
-            if let image_path = movie?.backdrop_path {
-                cell.movieImageView.af_setImage(withURL: UrlManager.getImageUrl(imgPath: image_path))
-                if let vote = Int((movie?.vote_average)!/2) as Int? {
-                    cell.ratingControl.voteAverage = vote
+        let idx = indexPath.row
+        if idx <= movies.count - 1 {
+            if (searchActive) {
+                movie = filtered[idx]
+            }
+            else {
+                movie = movies[idx]
+            }
+            if movie != nil {
+                cell.labelMovie.text = movie?.title
+                // set image by url async
+                if let image_path = movie?.backdrop_path {
+                    cell.movieImageView.af_setImage(withURL: UrlManager.getImageUrl(imgPath: image_path))
+                    if let vote = Int((movie?.vote_average)!/2) as Int? {
+                        cell.ratingControl.voteAverage = vote
+                    }
                 }
             }
         }
@@ -177,7 +158,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            let realm = try! Realm()
+            
             let deletedItem = movies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
