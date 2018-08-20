@@ -12,11 +12,7 @@ import UIKit
 
 class CoreDataManager {
     
-    var context: NSManagedObjectContext?
-    
-    init() {
-        context = Utils.getContext()
-    }
+    let managedContext = Utils.getContext()
     
     // MARK: Movies
     
@@ -30,7 +26,7 @@ class CoreDataManager {
                 let ids = Set<Int>(mov.genre_ids!)
                 
                 if ids.intersection(userIds).count > 0 {
-                    let movie = Movie(context: context!)
+                    let movie = Movie(context: managedContext)
                     if let id = movie.id {
                         movie.id = String("\(id)")
                     }
@@ -42,7 +38,7 @@ class CoreDataManager {
                     movie.release_date = mov.release_date
                     // set genres
                     for id in ids {
-                        let genreId = GenreId(context: context!)
+                        let genreId = GenreId(context: managedContext)
                         genreId.id = "\(id)"
                         movie.addToGenreIds(genreId)
                     }
@@ -64,7 +60,7 @@ class CoreDataManager {
         var movsDb: [Movie]? = nil
         
         do {
-            movsDb = (try context?.fetch(Movie.fetchRequest()))!
+            movsDb = try managedContext.fetch(Movie.fetchRequest())
         } catch {
             print("Failed to fetch movies from Core Data")
         }
@@ -88,7 +84,7 @@ class CoreDataManager {
         var genreSelected: [GenreSelected]? = nil
         
         do {
-            genreSelected = try context?.fetch(GenreSelected.fetchRequest())
+            genreSelected = try managedContext.fetch(GenreSelected.fetchRequest())
         } catch {
             print("Failed to fetch entity from Core Data")
         }
@@ -125,7 +121,7 @@ class CoreDataManager {
         var genres = [Genre]()
         
         for gen in genresResponse {
-            let genre = Genre(context: context!)
+            let genre = Genre(context: managedContext)
             if let id = gen.id {
                 genre.id = String("\(id)")
             }
@@ -142,7 +138,7 @@ class CoreDataManager {
         let sort = NSSortDescriptor(key: #keyPath(Genre.name), ascending: true)
         fetchRequest.sortDescriptors = [sort]
         do {
-            genresDb = (try context?.fetch(Genre.fetchRequest()))!
+            genresDb = try managedContext.fetch(Genre.fetchRequest())
         } catch {
             print("Failed to fetch genres from Core Data")
         }
@@ -181,7 +177,6 @@ class CoreDataManager {
     func deleteAllData(entity: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
-        let managedContext = Utils.getContext()
         
         do
         {
@@ -234,7 +229,7 @@ class CoreDataManager {
         
         var genresSelected = [GenreSelected]()
         for genre in genres! {
-            let genreSelected = GenreSelected(context: context!)
+            let genreSelected = GenreSelected(context: managedContext)
             genreSelected.id = genre.id
             genresSelected.append(genreSelected)
         }

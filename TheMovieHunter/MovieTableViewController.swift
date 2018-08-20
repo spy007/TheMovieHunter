@@ -68,6 +68,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     private func loadMovies() {
+        
         self.mng?.deleteAllData(entity: String(describing: Movie.self))
         
         let moviesYearRange = Defaults.getMovieYearsRange()
@@ -297,7 +298,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         
         if searchText.count == 0 {
             searchActive = false;
-            self.tableView.reloadData()
         } else {
             filtered = movies.filter({ (movie) -> Bool in
                 let tmp: NSString = movie.title! as NSString
@@ -309,8 +309,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
             } else {
                 searchActive = true;
             }
-            self.tableView.reloadData()
         }
+        
+        self.tableView.reloadData()
     }
     
     @objc func searchTapped(sender:UIButton) {

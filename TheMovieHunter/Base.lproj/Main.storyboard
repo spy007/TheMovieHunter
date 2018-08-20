@@ -67,9 +67,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="NyR-Un-LZE"/>
-                    <navigationItem key="navigationItem" title="Movies" id="wJA-Gs-wMa">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="yWw-7u-Cb0"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Movies" id="wJA-Gs-wMa"/>
                     <connections>
                         <outlet property="searchBar" destination="67p-Xj-zjy" id="TzX-W2-SHA"/>
                     </connections>
