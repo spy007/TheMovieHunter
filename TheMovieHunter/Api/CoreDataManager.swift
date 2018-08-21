@@ -16,8 +16,7 @@ class CoreDataManager {
     
     // MARK: Movies
     
-    func save(movieResults: [MovieResults]?) {
-        //        DispatchQueue.global(qos: .userInitiated).async {
+    func save(movieResults: [MovieResults]?) -> [Movie] {
         var movies: [Movie] = []
         let userIds = getUserSelectedGenreIds()
         
@@ -53,7 +52,8 @@ class CoreDataManager {
             
             saveContext()
         }
-        //        }
+        
+        return movies
     }
     
     func getMovies() -> [Movie] {
@@ -94,11 +94,12 @@ class CoreDataManager {
     
     func getUserSelectedGenreIds() -> Set<Int> {
         var ids = Set<Int>()
-        let selectedGenres = getGenresSelected()
-        
-        for genre in selectedGenres {
-            if genre.selected {
-                ids.insert(Int(genre.id!)!)
+        if let selectedGenres = getGenres() {
+            
+            for genre in selectedGenres {
+                if genre.selected {
+                    ids.insert(Int(genre.id!)!)
+                }
             }
         }
         
@@ -107,13 +108,15 @@ class CoreDataManager {
     
     // MARK: Genres
     
-    func saveSelectedGenre(genreSelected: GenreSelected?, isSelected: Bool) {
+    func saveSelectedGenre(genreSelected: Genre?, isSelected: Bool) {
         
         if let genreSelected = genreSelected {
             
             genreSelected.setValue(isSelected, forKey: Constants.attribute_selected)
             
             saveContext()
+            
+            Defaults.setSelectedGenres()
         }
     }
     
@@ -233,13 +236,8 @@ class CoreDataManager {
             genreSelected.id = genre.id
             genresSelected.append(genreSelected)
         }
-        if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
-            saveSelectedGenre(genreSelected: getGenresSelectedDict()![Constants.actionId], isSelected: true)
-            Defaults.setSelectedGenres()
-        } else {
-            saveContext()
-        }
         
+        saveContext()
     }
     
     func saveContext() {

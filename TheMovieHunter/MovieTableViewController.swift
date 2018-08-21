@@ -24,7 +24,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        showAlert()
+        //       showAlert()
         
         // Setup delegates
         searchBar.delegate = self
@@ -34,10 +34,8 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-
-        Utils.getPrivateContext().perform {
-            self.loadMoviesData()
-        }
+        
+        self.loadMoviesData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,10 +56,13 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                     // Code in here is now running "in the background" and can safely
                     // do anything in privateContext.
                     // This is where you will create your entities and save them.
-                    mng.deleteAllData(entity: String(describing: Genre.self))
-                    mng.save(genresResponse: genres)
-                    mng.saveSelectedGenres()
-                    self.loadMovies()
+                    Utils.getPrivateContext().perform {
+                        if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
+                            mng.save(genresResponse: genres)
+                            mng.saveSelectedGenres()
+                        }
+                        self.loadMovies()
+                    }
                 }
             }
             }.resume()
@@ -75,6 +76,8 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         let maxYear = Int(moviesYearRange.1)
         let minYear = Int(moviesYearRange.0)
         
+        self.movies.removeAll()
+        
         for y in minYear...maxYear {
             
             URLSession.shared.dataTask(with: UrlManager.getMoviesUrlByYear(year: Int(Constants.minMovieYear)+y)) { (data, response, error) in
@@ -83,18 +86,32 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                 let responseModel = try? jsonDecoder.decode(MoviesJson.self, from: data!)
                 
                 if let movieResults = responseModel!.results {
-                    self.mng?.save(movieResults: movieResults)
-                    
-                    self.movies = (self.mng?.getMovies())!
+                    if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
+                        // not to make movies list empty if user have not yet selected genres
+                        if let genreSelected = self.mng?.getGenresDict()![Constants.actionId] {
+                            self.mng?.saveSelectedGenre(genreSelected: genreSelected, isSelected: true)
+                        }
+                    }
+                    if let movs = self.mng?.save(movieResults: movieResults) {
+                        if movs.count > 0 {
+                            self.movies += movs
+                        }
+                    }
+                }
+                
+                if y == maxYear {
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
-                        // self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
-                        self.setTabBarBadge()
                     }
                 }
                 
                 }.resume()
         }
+        
+        // Will use later
+        //        DispatchQueue.main.async {
+        //            self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
+        //        }
     }
     
     private func showAlert() {
@@ -320,14 +337,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     
     @objc func addTapped (sender:UIButton) {
         print("add pressed")
-    }
-    
-    private func setTabBarBadge() {
-        // Configure Tab Bar Item
-        let count = self.movies.count
-        if count > 0 {
-            self.tabBarItem.badgeValue = "\(count)"
-        }
     }
     
 }

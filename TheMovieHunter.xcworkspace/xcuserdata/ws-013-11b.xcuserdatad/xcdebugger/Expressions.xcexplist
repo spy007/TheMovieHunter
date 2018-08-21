@@ -20,6 +20,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "CoreDataManager.save(movieResults:):CoreDataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "userIds.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static Utils.getGenreNamesSequence(movie:):Utils.swift">
          <PersistentStrings>
             <PersistentString
@@ -75,7 +83,7 @@
          contextName = "closure #1 in closure #1 in MovieTableViewController.loadMoviesData():MovieTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "mng.getGenres()[0].name">
+               value = "mng.getGenres().count">
             </PersistentString>
             <PersistentString
                value = "newGenresSet.count">
@@ -87,7 +95,7 @@
                value = "mng.movieGenreToGenreSet(movieGenres: genres).count">
             </PersistentString>
             <PersistentString
-               value = "mng.getGenres().count">
+               value = "mng.getGenres()[0].name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -95,15 +103,18 @@
          contextName = "SearchSettingsViewController.init(coder:):SearchSettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "&quot;\(Int(maxMovieYear))&quot;">
+               value = "Int(maxMovieYear)">
             </PersistentString>
             <PersistentString
                value = "maxMovieYear">
             </PersistentString>
             <PersistentString
-               value = "Int(maxMovieYear)">
+               value = "&quot;\(Int(maxMovieYear))&quot;">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MovieTableViewController.tableView(_:numberOfRowsInSection:):MovieTableViewController.swift">
       </ContextState>
       <ContextState
          contextName = "GenresControl.setupGenres():GenresControl.swift">
@@ -112,9 +123,6 @@
                value = "picker">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MovieTableViewController.tableView(_:numberOfRowsInSection:):MovieTableViewController.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in AuthorizationViewController.guestAuthorization():AuthorizationViewController.swift">
@@ -133,28 +141,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "GenreTableViewCell.awakeFromNib():GenreTableViewCell.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SearchSettingsViewController.viewDidLoad():SearchSettingsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "genres[0].id">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CoreDataManager.save(genresResponse:):CoreDataManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "genre.id">
-            </PersistentString>
-            <PersistentString
-               value = "getGenres().count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "MovieTableViewController.tableView(_:cellForRowAt:):MovieTableViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -169,6 +155,28 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SearchSettingsViewController.viewDidLoad():SearchSettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "genres[0].id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "GenreTableViewCell.awakeFromNib():GenreTableViewCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CoreDataManager.save(genresResponse:):CoreDataManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "genre.id">
+            </PersistentString>
+            <PersistentString
+               value = "getGenres().count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "AuthorizationViewController.loginProcess():AuthorizationViewController.swift">
       </ContextState>
       <ContextState
@@ -176,6 +184,14 @@
          <PersistentStrings>
             <PersistentString
                value = "genre.id = &quot;\(id)&quot;">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MovieTableViewController.loadMovies():MovieTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "movies.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -199,7 +215,7 @@
          contextName = "static MovieYearUtils.getMaxYearOfMovies(userSelectedMaxYearOfMovies:):MovieYearUtils.swift">
          <PersistentStrings>
             <PersistentString
-               value = "getCurrentYear()">
+               value = "Int(Defaults.getMovieYearsRange().1 + userSelectedMaxYearOfMovies)">
             </PersistentString>
             <PersistentString
                value = "Defaults.getMovieYearsRange().1">
@@ -208,7 +224,7 @@
                value = "userSelectedMaxYearOfMovies">
             </PersistentString>
             <PersistentString
-               value = "Int(Defaults.getMovieYearsRange().1 + userSelectedMaxYearOfMovies)">
+               value = "getCurrentYear()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -252,6 +268,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AuthorizationViewController.setGuestAuthenticationButton():AuthorizationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "date &lt; Date()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "MovieTableViewController.loadMovies(genres:):MovieTableViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -259,14 +283,6 @@
             </PersistentString>
             <PersistentString
                value = "self.mng?.getGenresSelectedIdsSet()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "AuthorizationViewController.setGuestAuthenticationButton():AuthorizationViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "date &lt; Date()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

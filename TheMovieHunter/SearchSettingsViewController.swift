@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftRangeSlider
+import os.log
 
 class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     
@@ -17,7 +18,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var rangeSlider: RangeSlider!
     
     private var genres: [Genre]? = []
-    private var genresSelectedDict = [Int:GenreSelected]()
+    private var genresSelectedDict = [Int:Genre]()
     private var lowerValue: Double? = nil
     private var mng: CoreDataManager? = nil
     
@@ -26,18 +27,20 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         
         self.tableView.dataSource = self
         
-        Utils.getPrivateContext().perform {
-            
-            self.mng = CoreDataManager()
-            
-            self.genres = self.mng?.getGenres()
-            
-            self.genresSelectedDict = (self.mng?.getGenresSelectedDict())!
-            
-            // Initialize Tab Bar Item
-            self.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "icon_settings_1x"), tag: 1)
+        self.mng = CoreDataManager()
+        
+        self.genres = self.mng?.getGenres()
+        
+        if let genresSelected = self.mng?.getGenresDict() {
+            if genresSelected.count > 0 {
+                self.genresSelectedDict = genresSelected
+            } else {
+                print("Fail: genres selected read from core data is empty")
+            }
             
             self.setRangeSlider()
+        } else {
+            print("Fail: extracting genres selected from Core Data")
         }
     }
     
@@ -61,7 +64,11 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         
         cell.labelGenre.text = genre?.name
         
-        setSwitchView(sw: cell.switchGenre, id: (genre?.id)!)
+        if let id = genre?.id {
+            setSwitchView(sw: cell.switchGenre, id: id)
+        } else {
+            print("Fail: id is nil")
+        }
         
         return cell
     }
@@ -72,10 +79,14 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         
         if let id = Int(id) {
             sw.tag = id
-            sw.isOn = (genresSelectedDict[id]?.selected)!
+            if (genresSelectedDict.count > 0) {
+                sw.isOn = (genresSelectedDict[id]?.selected)!
+            } else {
+                print("Fail: genres selected is empty")
+            }
         }
         
-        sw.addTarget(self, action: #selector(onSwitchValueChanged(_:)), for: .valueChanged)
+        sw.addTarget(self, action: #selector(onSwitchValueChanged(_:)), for: .touchUpInside)
     }
     
     private func setRangeSlider() {
@@ -110,10 +121,11 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
      */
     
     @objc func onSwitchValueChanged(_ switchView: UISwitch) {
-        print("switch changed witch tag \(switchView.tag)")
-        Utils.getPrivateContext().perform {
-            self.mng?.saveSelectedGenre(genreSelected: self.genresSelectedDict[switchView.tag], isSelected: switchView.isOn)
-        }
+        let isOn = switchView.isOn
+        let tag = switchView.tag
+        print("switch changed witch tag=\(tag) isOn=\(isOn)")
+        self.mng?.saveSelectedGenre(genreSelected: self.genresSelectedDict[tag], isSelected: isOn)
+        switchView.isOn = isOn
     }
     
     @objc func rangeSliderValueDidChange(_ slider:RangeSlider!) {
