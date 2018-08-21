@@ -8,6 +8,6 @@
 
 import Foundation
 
-class GenresJson: Decodable {
-    var genres: [MovieGenreResponse]? = nil
+class GenresResponse: Decodable {
+    var genres: [MovieGenreResponse]?
 }

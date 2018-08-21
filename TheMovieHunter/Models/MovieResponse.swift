@@ -14,9 +14,9 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import RealmSwift
 
-public class MovieResults : Object, Decodable {
+public class MovieResponse : Object, Decodable {
     var vote_count : Int?
-    var id : Int!
+    var id : Int?
     var video : Bool?
     var vote_average : Double?
     var title : String?

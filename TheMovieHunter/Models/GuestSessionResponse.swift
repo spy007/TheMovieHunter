@@ -8,8 +8,8 @@
 
 import Foundation
 
-class GuestSessionJson: Decodable {
+class GuestSessionResponse: Decodable {
     var success: Bool = false
-    var guest_session_id: String? = nil
-    var expires_at: String? = nil
+    var guest_session_id: String?
+    var expires_at: String?
 }

@@ -16,9 +16,9 @@ class CoreDataManager {
     
     // MARK: Movies
     
-    func save(movieResults: [MovieResults]?) -> [Movie] {
+    func save(movieResults: [MovieResponse]?) -> [Movie] {
         var movies: [Movie] = []
-        let userIds = getUserSelectedGenreIds()
+        let userIds = getGenreIds()
         
         if let movs = movieResults {
             for mov in movs {
@@ -68,35 +68,11 @@ class CoreDataManager {
         return movsDb!
     }
     
-    //    func getEntity<T>() -> [T] {
-    //        var entity: [T]? = nil
-    //
-    //        do {
-    //            entity = try context?.fetch(T.fetchRequest()) as? [T]
-    //        } catch {
-    //            print("Failed to fetch entity from Core Data")
-    //        }
-    //
-    //        return entity!
-    //    }
-    
-    func getGenresSelected() -> [GenreSelected] {
-        var genreSelected: [GenreSelected]? = nil
-        
-        do {
-            genreSelected = try managedContext.fetch(GenreSelected.fetchRequest())
-        } catch {
-            print("Failed to fetch entity from Core Data")
-        }
-        
-        return genreSelected!
-    }
-    
-    func getUserSelectedGenreIds() -> Set<Int> {
+    func getGenreIds() -> Set<Int> {
         var ids = Set<Int>()
-        if let selectedGenres = getGenres() {
+        if let genres = getGenres() {
             
-            for genre in selectedGenres {
+            for genre in genres {
                 if genre.selected {
                     ids.insert(Int(genre.id!)!)
                 }
@@ -107,8 +83,8 @@ class CoreDataManager {
     }
     
     // MARK: Genres
-    
-    func saveSelectedGenre(genreSelected: Genre?, isSelected: Bool) {
+
+    func saveUserSelectedGenre(genreSelected: Genre?, isSelected: Bool) {
         
         if let genreSelected = genreSelected {
             
@@ -162,21 +138,7 @@ class CoreDataManager {
         
         return genresDict
     }
-    
-    func getGenresSelectedDict() -> [Int:GenreSelected]? {
-        let genresSelected = getGenresSelected()
-        
-        var genresSelectedDict = [Int:GenreSelected]()
-        
-        for g in genresSelected {
-            let id = Int(g.id!)
-            genresSelectedDict[id!] = g
-            
-        }
-        
-        return genresSelectedDict
-    }
-    
+
     func deleteAllData(entity: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
@@ -221,23 +183,6 @@ class CoreDataManager {
         }
         
         return dictGenres
-    }
-    
-    func getSelectedGenres() {
-        
-    }
-    
-    func saveSelectedGenres() {
-        let genres = getGenres()
-        
-        var genresSelected = [GenreSelected]()
-        for genre in genres! {
-            let genreSelected = GenreSelected(context: managedContext)
-            genreSelected.id = genre.id
-            genresSelected.append(genreSelected)
-        }
-        
-        saveContext()
     }
     
     func saveContext() {

@@ -12,9 +12,9 @@ import Foundation
 
 /* For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-public class MoviesJson : Decodable {
-    var page : Int!
-    var total_results : Int!
-    var total_pages : Int!
-    var results : [MovieResults]!    
+public class MoviesResponse : Decodable {
+    var page : Int?
+    var total_results : Int?
+    var total_pages : Int?
+    var results : [MovieResponse]?
 }

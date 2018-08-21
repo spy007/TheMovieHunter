@@ -110,7 +110,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         if isDateExpired {
             URLSession.shared.dataTask(with: UrlManager.getToken()) { (data, response, error) in
                 let jsonDecoder = JSONDecoder()
-                if let tokenJson = try? jsonDecoder.decode(TokenJson.self, from: data!) {
+                if let tokenJson = try? jsonDecoder.decode(TokenResponse.self, from: data!) {
                     let success = tokenJson.success
                     print("session: \(success)")
                     
@@ -186,7 +186,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                if let responseJSON = responseJSON as? TokenJson {
+                if let responseJSON = responseJSON as? TokenResponse {
                     print("****** Response on login request \(responseJSON)")
                 } else {
                     print("Failed to authorize, username or password wrong") // add dialog
@@ -230,7 +230,7 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         } else {
             URLSession.shared.dataTask(with: UrlManager.getGuestSession()) { (data, response, error) in
                 let jsonDecoder = JSONDecoder()
-                if let guestSessionJson = try? jsonDecoder.decode(GuestSessionJson.self, from: data!) {
+                if let guestSessionJson = try? jsonDecoder.decode(GuestSessionResponse.self, from: data!) {
                     let success = guestSessionJson.success
                     print("session: \(success)")
                     

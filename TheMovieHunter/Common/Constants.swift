@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 public struct Constants {
-    
-    public static let model = "MovieResults"
     public static let starsCount = 5
     
     // image star

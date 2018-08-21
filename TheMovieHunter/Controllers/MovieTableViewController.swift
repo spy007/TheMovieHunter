@@ -24,9 +24,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //       showAlert()
-        
-        // Setup delegates
         searchBar.delegate = self
         
         mng = CoreDataManager()
@@ -50,7 +47,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
             if let mng = self.mng {
                 let jsonDecoder = JSONDecoder()
-                let genresJson = try? jsonDecoder.decode(GenresJson.self, from: data!)
+                let genresJson = try? jsonDecoder.decode(GenresResponse.self, from: data!)
                 
                 if let genres = genresJson?.genres {
                     // Code in here is now running "in the background" and can safely
@@ -59,7 +56,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                     Utils.getPrivateContext().perform {
                         if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
                             mng.save(genresResponse: genres)
-                            mng.saveSelectedGenres()
                         }
                         self.loadMovies()
                     }
@@ -83,13 +79,13 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
             URLSession.shared.dataTask(with: UrlManager.getMoviesUrlByYear(year: Int(Constants.minMovieYear)+y)) { (data, response, error) in
                 let jsonDecoder = JSONDecoder()
                 
-                let responseModel = try? jsonDecoder.decode(MoviesJson.self, from: data!)
+                let responseModel = try? jsonDecoder.decode(MoviesResponse.self, from: data!)
                 
                 if let movieResults = responseModel!.results {
                     if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
                         // not to make movies list empty if user have not yet selected genres
                         if let genreSelected = self.mng?.getGenresDict()![Constants.actionId] {
-                            self.mng?.saveSelectedGenre(genreSelected: genreSelected, isSelected: true)
+                            self.mng?.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
                         }
                     }
                     if let movs = self.mng?.save(movieResults: movieResults) {
@@ -107,11 +103,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 }.resume()
         }
-        
-        // Will use later
-        //        DispatchQueue.main.async {
-        //            self.loadingMoviesAlert?.dismiss(animated: true, completion: nil)
-        //        }
     }
     
     private func showAlert() {
@@ -176,59 +167,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            
-            let deletedItem = movies.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
-            //            let predicate = NSPredicate(format: "id == %@", deletedItem.getId())
-            //ead
-            //            if let productToDelete = realm.objects(Contact.self)
-            //                .filter(predicate).first {
-            //                realm.delete(productToDelete)
-            //            }
-            //
-            //            RealmManager.deleteObject(object: deletedItem, completionHandler: { (error) in
-            //                if let err = error {
-            //                    print("Error \(err.localizedDescription)")
-            //                }
-            //            })
-            
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
-    // Try create header in list later
-    /*
-     
-     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-     return Constants.searchSettingsHeight
-     }
-     
-     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-     
-     let frame: CGRect = tableView.frame
-     
-     let headerView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: Constants.searchSettingsHeight))
-     
-     headerView.addSubview(SearchSettingsControl())
-     return headerView
-     }
-     */
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
     
     // MARK: - Navigation
     
@@ -236,32 +177,27 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         
         super.prepare(for: segue, sender: sender)
         
-        switch(segue.identifier ?? "") {
+        if let identifier = segue.identifier {
             
-        case "AddItem":
-            os_log("Adding a new movie.", log: OSLog.default, type: .debug)
-            
-        case "Show":
-            print("Show")
-            
-        case "ShowDetail":
-            guard let movieDetailViewController = segue.destination as? MovieViewController else {
-                fatalError("Unexpected destination: \(segue.destination)")
+            if identifier == "ShowDetail" {
+                guard let movieDetailViewController = segue.destination as? MovieViewController else {
+                    fatalError("Unexpected destination: \(segue.destination)")
+                }
+                
+                guard let selectedMovieCell = sender as? MovieTableViewCell else {
+                    fatalError("Unexpected sender: \(sender)")
+                }
+                
+                guard let indexPath = tableView.indexPath(for: selectedMovieCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                
+                let selectedMovie = movies[indexPath.row]
+                movieDetailViewController.movie = selectedMovie
+                
+            } else {
+                fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
             }
-            
-            guard let selectedMovieCell = sender as? MovieTableViewCell else {
-                fatalError("Unexpected sender: \(sender)")
-            }
-            
-            guard let indexPath = tableView.indexPath(for: selectedMovieCell) else {
-                fatalError("The selected cell is not being displayed by the table")
-            }
-            
-            let selectedMovie = movies[indexPath.row]
-            movieDetailViewController.movie = selectedMovie
-            
-        default:
-            fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
         }
     }
     
@@ -285,12 +221,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 movies.append(movie)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
-                
-                RealmManager.addOrUpdate(model: Constants.model, object: movie, completionHandler: { (error) in
-                    if let err = error {
-                        print("Error \(err.localizedDescription)")
-                    }
-                })
             }
         }
     }

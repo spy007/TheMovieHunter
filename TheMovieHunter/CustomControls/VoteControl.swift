@@ -66,7 +66,7 @@ import UIKit
             } else {
                 button.setImage(emptyStar, for: .normal)
             }
-//            button.setImage(filledStar, for: .selected)
+            //            button.setImage(filledStar, for: .selected)
             button.setImage(highlightedStar, for: .highlighted)
             button.setImage(highlightedStar, for: [.highlighted, .selected])
             

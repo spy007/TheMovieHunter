@@ -8,8 +8,8 @@
 
 import Foundation
 
-class TokenJson: Decodable {
+class TokenResponse: Decodable {
     var success: Bool = false
-    var expires_at: String? = nil
-    var request_token: String? = nil
+    var expires_at: String?
+    var request_token: String?
 }

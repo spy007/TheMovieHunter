@@ -124,7 +124,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         let isOn = switchView.isOn
         let tag = switchView.tag
         print("switch changed witch tag=\(tag) isOn=\(isOn)")
-        self.mng?.saveSelectedGenre(genreSelected: self.genresSelectedDict[tag], isSelected: isOn)
+        self.mng?.saveUserSelectedGenre(genreSelected: self.genresSelectedDict[tag], isSelected: isOn)
         switchView.isOn = isOn
     }
     
