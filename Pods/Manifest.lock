@@ -5,6 +5,7 @@ PODS:
   - Crashlytics (3.10.5):
     - Fabric (~> 1.7.9)
   - Fabric (1.7.9)
+  - PKHUD (5.1.0)
   - Realm (3.7.5):
     - Realm/Headers (= 3.7.5)
   - Realm/Headers (3.7.5)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - AlamofireImage
   - Crashlytics
   - Fabric
+  - PKHUD
   - Realm
   - RealmSwift
   - SwiftRangeSlider
@@ -29,6 +31,7 @@ SPEC REPOS:
     - AlamofireImage
     - Crashlytics
     - Fabric
+    - PKHUD
     - Realm
     - RealmSwift
     - SwiftRangeSlider
@@ -39,11 +42,12 @@ SPEC CHECKSUMS:
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   Crashlytics: 7f2e38d302d9da96475b3d64d86fb29e31a542b7
   Fabric: a2917d3895e4c1569b9c3170de7320ea1b1e6661
+  PKHUD: 62ea46a1e88c4def1da784878d199bb54c841e3c
   Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
   RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
   SwiftRangeSlider: f86e3b637c961120158fa1a89277c8343845cbe4
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 60d322d12465d203fb9a2a7c6f75967e85b8a800
+PODFILE CHECKSUM: fb2a1cf9d16c192dfaebf6cb8d22fa3af8f9e134
 
 COCOAPODS: 1.5.3

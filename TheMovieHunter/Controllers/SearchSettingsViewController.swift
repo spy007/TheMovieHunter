@@ -32,7 +32,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         self.genres = self.mng?.getGenres()
         
         if let genresSelected = self.mng?.getGenresDict() {
-            if genresSelected.count > 0 {
+            if !genresSelected.isEmpty {
                 self.genresSelectedDict = genresSelected
             } else {
                 print("Fail: genres selected read from core data is empty")
@@ -79,10 +79,10 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         
         if let id = Int(id) {
             sw.tag = id
-            if (genresSelectedDict.count > 0) {
+            if !genresSelectedDict.isEmpty {
                 sw.isOn = (genresSelectedDict[id]?.selected)!
             } else {
-                print("Fail: genres selected is empty")
+                print("Failed to extract user selected genres")
             }
         }
         

@@ -17,6 +17,9 @@ class CoreDataManager {
     // MARK: Movies
     
     func save(movieResults: [MovieResponse]?) -> [Movie] {
+        
+        
+        
         var movies: [Movie] = []
         let userIds = getGenreIds()
         
@@ -24,7 +27,7 @@ class CoreDataManager {
             for mov in movs {
                 let ids = Set<Int>(mov.genre_ids!)
                 
-                if ids.intersection(userIds).count > 0 {
+                if !ids.intersection(userIds).isEmpty {
                     let movie = Movie(context: managedContext)
                     if let id = movie.id {
                         movie.id = String("\(id)")

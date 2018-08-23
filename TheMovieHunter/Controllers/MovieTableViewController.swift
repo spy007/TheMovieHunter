@@ -8,11 +8,14 @@
 
 import UIKit
 import os.log
+import PKHUD
 
-class MovieTableViewController: UITableViewController, UISearchBarDelegate {
+class MovieTableViewController: UITableViewController, UISearchBarDelegate, MovieTableViewProtocol {
     
     //MARK: Properties
     
+    // TODO: figure out how to not to initialize presenter below like in IOS-Viper-Architecture project
+    var presenter: MovieTablePresenterProtocol?
     var loadingMoviesAlert: UIAlertController? = nil
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -26,13 +29,18 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         
         searchBar.delegate = self
         
-        mng = CoreDataManager()
+        presenter = MovieTablePresenter()
+// TODO: remove below commented code after checking presenter implementation
+//        mng = CoreDataManager()
     }
     
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
+  
+        // TODO: remove below commented code after checking presenter implementation
+//        self.loadMoviesData()
         
-        self.loadMoviesData()
+        presenter?.viewWillAppear(view: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,74 +49,77 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: Private methods
-    
-    private func loadMoviesData() {
-        
-        URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
-            if let mng = self.mng {
-                let jsonDecoder = JSONDecoder()
-                let genresJson = try? jsonDecoder.decode(GenresResponse.self, from: data!)
-                
-                if let genres = genresJson?.genres {
-                    // Code in here is now running "in the background" and can safely
-                    // do anything in privateContext.
-                    // This is where you will create your entities and save them.
-                    Utils.getPrivateContext().perform {
-                        if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
-                            mng.save(genresResponse: genres)
-                        }
-                        self.loadMovies()
-                    }
-                }
-            }
-            }.resume()
-    }
-    
-    private func loadMovies() {
-        
-        self.mng?.deleteAllData(entity: String(describing: Movie.self))
-        
-        let moviesYearRange = Defaults.getMovieYearsRange()
-        let maxYear = Int(moviesYearRange.1)
-        let minYear = Int(moviesYearRange.0)
-        
-        self.movies.removeAll()
-        
-        for y in minYear...maxYear {
-            
-            URLSession.shared.dataTask(with: UrlManager.getMoviesUrlByYear(year: Int(Constants.minMovieYear)+y)) { (data, response, error) in
-                let jsonDecoder = JSONDecoder()
-                
-                let responseModel = try? jsonDecoder.decode(MoviesResponse.self, from: data!)
-                
-                if let movieResults = responseModel!.results {
-                    if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
-                        // not to make movies list empty if user have not yet selected genres
-                        if let genreSelected = self.mng?.getGenresDict()![Constants.actionId] {
-                            self.mng?.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
-                        }
-                    }
-                    if let movs = self.mng?.save(movieResults: movieResults) {
-                        if movs.count > 0 {
-                            self.movies += movs
-                        }
-                    }
-                }
-                
-                if y == maxYear {
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-                
-                }.resume()
-        }
-    }
-    
-    private func showAlert() {
-        self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
-        self.present(self.loadingMoviesAlert!, animated: false, completion: nil)
-    }
+
+    // TODO: remove below commented code after checking presenter implementation
+//    private func loadMoviesData() {
+//
+//        URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
+//            if let mng = self.mng {
+//                let jsonDecoder = JSONDecoder()
+//                let genresJson = try? jsonDecoder.decode(GenresResponse.self, from: data!)
+//
+//                if let genres = genresJson?.genres {
+//                    // Code in here is now running "in the background" and can safely
+//                    // do anything in privateContext.
+//                    // This is where you will create your entities and save them.
+//                    Utils.getPrivateContext().perform {
+//                        if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
+//                            mng.save(genresResponse: genres)
+//                        }
+//                        self.loadMovies()
+//                    }
+//                }
+//            }
+//            }.resume()
+//    }
+
+    // TODO: remove below commented code after checking presenter implementation
+//    private func loadMovies() {
+//
+//        self.mng?.deleteAllData(entity: String(describing: Movie.self))
+//
+//        let moviesYearRange = Defaults.getMovieYearsRange()
+//        let maxYear = Int(moviesYearRange.1)
+//        let minYear = Int(moviesYearRange.0)
+//
+//        self.movies.removeAll()
+//
+//        for y in minYear...maxYear {
+//
+//            URLSession.shared.dataTask(with: UrlManager.getMoviesUrlByYear(year: Int(Constants.minMovieYear)+y)) { (data, response, error) in
+//                let jsonDecoder = JSONDecoder()
+//
+//                let responseModel = try? jsonDecoder.decode(MoviesResponse.self, from: data!)
+//
+//                if let movieResults = responseModel!.results {
+//                    if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
+//                        // not to make movies list empty if user have not yet selected genres
+//                        if let genreSelected = self.mng?.getGenresDict()![Constants.actionId] {
+//                            self.mng?.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
+//                        }
+//                    }
+//                    if let movs = self.mng?.save(movieResults: movieResults) {
+//                        if movs.count > 0 {
+//                            self.movies += movs
+//                        }
+//                    }
+//                }
+//
+//                if y == maxYear {
+//                    DispatchQueue.main.async {
+//                        self.tableView.reloadData()
+//                    }
+//                }
+//
+//                }.resume()
+//        }
+//    }
+
+    // TODO: remove below commented code after checking presenter implementation
+//    private func showAlert() {
+//        self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
+//        self.present(self.loadingMoviesAlert!, animated: false, completion: nil)
+//    }
     
     // MARK: - Table view data source
     
@@ -118,10 +129,10 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if(searchActive) {
-            return filtered.count
-        }
+// TODO: remove below commented code after checking presenter implementation
+//        if(searchActive) {
+//            return filtered.count
+//        }
         return movies.count
     }
     
@@ -136,12 +147,13 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
         var movie: Movie?
         let idx = indexPath.row
         if idx <= movies.count - 1 {
-            if (searchActive) {
-                movie = filtered[idx]
-            }
-            else {
+            // TODO: remove below commented code after checking presenter implementation
+//            if (searchActive) {
+//                movie = filtered[idx]
+//            }
+//            else {
                 movie = movies[idx]
-            }
+//            }
             if movie != nil {
                 cell.labelMovie.text = movie?.title
                 // set image by url async
@@ -226,47 +238,78 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        // TODO: remove below commented code after checking presenter implementation
+//        searchActive = true;
+        presenter?.searchActive(searchActive: true)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
+        // TODO: remove below commented code after checking presenter implementation
+        //        searchActive = true;
+        presenter?.searchActive(searchActive: true)
+
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        // TODO: remove below commented code after checking presenter implementation
+        //        searchActive = true;
+        presenter?.searchActive(searchActive: true)
+
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
+        // TODO: remove below commented code after checking presenter implementation
+        //        searchActive = true;
+        presenter?.searchActive(searchActive: true)
+
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText.count == 0 {
-            searchActive = false;
-        } else {
-            filtered = movies.filter({ (movie) -> Bool in
-                let tmp: NSString = movie.title! as NSString
-                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-                return range.location != NSNotFound
-            })
-            if(filtered.count == 0){
-                searchActive = false;
-            } else {
-                searchActive = true;
-            }
-        }
+        presenter?.searchMovies(with: searchText)
         
-        self.tableView.reloadData()
+//        if searchText.count == 0 {
+//            searchActive = false;
+//        } else {
+//            filtered = movies.filter({ (movie) -> Bool in
+//                let tmp: NSString = movie.title! as NSString
+//                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+//                return range.location != NSNotFound
+//            })
+//            if(filtered.count == 0){
+//                searchActive = false;
+//            } else {
+//                searchActive = true;
+//            }
+//        }
+//
+//        self.tableView.reloadData()
     }
     
-    @objc func searchTapped(sender:UIButton) {
-        print("search pressed")
+    func showMovies(with movies: [Movie]) {
+        self.movies = movies
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
-    @objc func addTapped (sender:UIButton) {
-        print("add pressed")
+    // MARK: Public methods
+    
+    func showLoading() {
+        DispatchQueue.main.async {
+            HUD.show(.progress)
+        }
     }
     
+    func hideLoading() {
+        DispatchQueue.main.async {
+            HUD.hide()
+        }
+    }
+    
+    func showError(errorMessage: String) {
+        DispatchQueue.main.async {
+            HUD.flash(.label(errorMessage), delay: 2.0)
+        }
+    }
 }

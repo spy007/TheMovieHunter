@@ -6,9 +6,8 @@ target 'TheMovieHunter' do
 pod 'SwiftyJSON'
 pod 'Alamofire'
 pod 'AlamofireImage'
-pod 'Realm'
-pod 'RealmSwift'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'SwiftRangeSlider'
+pod 'PKHUD'
 end
