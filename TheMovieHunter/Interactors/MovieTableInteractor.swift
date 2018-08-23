@@ -12,22 +12,22 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
     
     // MARK: Properties
     
-    var movies: [Movie] = []
-    var mng: CoreDataManager? = nil
+    private var movies: [Movie] = []
+    private var mng: CoreDataManager? = nil
     weak var presenter: MovieTablePresenterProtocol?
-    var searchActive : Bool = false
+    private var searchActive : Bool = false
     
     init(presenter: MovieTablePresenterProtocol?) {
+        
         self.presenter = presenter
+        
+        mng = CoreDataManager()
     }
     
     // MARK: Public methods
     
     func requestMoviesData() {
-        if mng == nil {
-            mng = CoreDataManager()
-        }
-        
+    
         if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
             
             URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
@@ -39,7 +39,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                     self.mng?.save(genresResponse: genres)
                     self.loadMovies()
                 } else {
-                    self.presenter?.showError("Failed to request genres")
+                    self.presenter?.showError(Constants.errorRequestGenres)
                 }
                 
                 }.resume()
@@ -115,7 +115,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                     if !self.movies.isEmpty {
                         self.presenter?.showMovies(with: self.movies)
                     } else {
-                        self.presenter?.showError("Failed to request movies")
+                        self.presenter?.showError(Constants.errorRequestMovies)
                     }
                 } 
                 
@@ -125,5 +125,14 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
     
     func searchActive(searchActive: Bool) {
         self.searchActive = searchActive
+    }
+    
+    func getGenres(with movie: Movie) -> String {
+        var genres = ""
+        if let gens = self.mng?.getGenreNamesSequence(movie: movie) {
+            genres = gens
+        }
+        
+        return genres
     }
 }

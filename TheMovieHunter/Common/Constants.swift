@@ -17,27 +17,25 @@ public struct Constants {
     public static let imageStarFilled = "filledStar"
     public static let imageStarHighlighted = "highlightedStar"
     
-    // sized
+    // size
     public static let imageStarSize = 44.0
-    public static let labelGenresWidth: CGFloat = 100
-    public static let pickerGenresWidth: CGFloat = 50
-    public static let pickerGenresHeight: CGFloat = 50
-    public static let searchSettingsHeight: CGFloat = 130
     
     // Core Data
-    // Entity GenreSelected attribute names
-    public static let attribute_selected = "selected"
+    // Entity Genre attribute name
+    public static let attributeSelected = "selected"
     
     // messages
-    public static let alertLoadingMovies = "Loading movies ..."
+    public static let messageLoadingMovies = "Loading movies..."
+    public static let errorRequestGenres = "Failed to request genres"
+    public static let errorRequestMovies = "Failed to request movies"
     
     // labels
     public static let labelGenres = "Genres: "
-    
-    public static let minMovieYear = 1902.0
     
     // other
     public static let actionId = 28
     public static let login = "kirill.ivanou"
     public static let password = "Test1"
+    
+    public static let minMovieYear = 1902.0
 }

@@ -26,11 +26,14 @@ class MovieViewController: UIViewController {
     
     var movie: Movie?
     
+    // genres sequence
+    var genres: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let releaseDate = NSLocalizedString("releaseDate", comment: "Date of film release")
-        let attributedText = NSMutableAttributedString(string: releaseDate/*, attributes: [NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18), NSAttributedStringKey.foregroundColor: UIColor.black]*/)
+        let attributedText = NSMutableAttributedString(string: releaseDate)
         labelCaptionReleaseDate!.attributedText = attributedText
         
         if let movie = movie as Movie?, let title = movie.title {
@@ -50,9 +53,8 @@ class MovieViewController: UIViewController {
             labelPopularity.text = "\(popularity)"
             
             labelReleaseDate.text = movie.release_date
-            
-//            labelGenres.sizeToFit()
-            labelGenres.text = CoreDataManager().getGenreNamesSequence(movie: movie)
+
+            labelGenres.text = genres
         }
     }
     

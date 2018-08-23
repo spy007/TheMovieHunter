@@ -14,15 +14,12 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     
     //MARK: Properties
     
-    // TODO: figure out how to not to initialize presenter below like in IOS-Viper-Architecture project
+    // TODO: figure out how not to initialize presenter below like in IOS-Viper-Architecture project
     var presenter: MovieTablePresenterProtocol?
     var loadingMoviesAlert: UIAlertController? = nil
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var searchActive : Bool = false
-    var filtered: [Movie] = []
     var movies: [Movie] = []
-    var mng: CoreDataManager? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,96 +27,13 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
         searchBar.delegate = self
         
         presenter = MovieTablePresenter()
-// TODO: remove below commented code after checking presenter implementation
-//        mng = CoreDataManager()
     }
     
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-  
-        // TODO: remove below commented code after checking presenter implementation
-//        self.loadMoviesData()
         
         presenter?.viewWillAppear(view: self)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: Private methods
-
-    // TODO: remove below commented code after checking presenter implementation
-//    private func loadMoviesData() {
-//
-//        URLSession.shared.dataTask(with: UrlManager.getGenresUrl()) { (data, response, error) in
-//            if let mng = self.mng {
-//                let jsonDecoder = JSONDecoder()
-//                let genresJson = try? jsonDecoder.decode(GenresResponse.self, from: data!)
-//
-//                if let genres = genresJson?.genres {
-//                    // Code in here is now running "in the background" and can safely
-//                    // do anything in privateContext.
-//                    // This is where you will create your entities and save them.
-//                    Utils.getPrivateContext().perform {
-//                        if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
-//                            mng.save(genresResponse: genres)
-//                        }
-//                        self.loadMovies()
-//                    }
-//                }
-//            }
-//            }.resume()
-//    }
-
-    // TODO: remove below commented code after checking presenter implementation
-//    private func loadMovies() {
-//
-//        self.mng?.deleteAllData(entity: String(describing: Movie.self))
-//
-//        let moviesYearRange = Defaults.getMovieYearsRange()
-//        let maxYear = Int(moviesYearRange.1)
-//        let minYear = Int(moviesYearRange.0)
-//
-//        self.movies.removeAll()
-//
-//        for y in minYear...maxYear {
-//
-//            URLSession.shared.dataTask(with: UrlManager.getMoviesUrlByYear(year: Int(Constants.minMovieYear)+y)) { (data, response, error) in
-//                let jsonDecoder = JSONDecoder()
-//
-//                let responseModel = try? jsonDecoder.decode(MoviesResponse.self, from: data!)
-//
-//                if let movieResults = responseModel!.results {
-//                    if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
-//                        // not to make movies list empty if user have not yet selected genres
-//                        if let genreSelected = self.mng?.getGenresDict()![Constants.actionId] {
-//                            self.mng?.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
-//                        }
-//                    }
-//                    if let movs = self.mng?.save(movieResults: movieResults) {
-//                        if movs.count > 0 {
-//                            self.movies += movs
-//                        }
-//                    }
-//                }
-//
-//                if y == maxYear {
-//                    DispatchQueue.main.async {
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//
-//                }.resume()
-//        }
-//    }
-
-    // TODO: remove below commented code after checking presenter implementation
-//    private func showAlert() {
-//        self.loadingMoviesAlert = LoadingAlert.create(title: nil, message: Constants.alertLoadingMovies)
-//        self.present(self.loadingMoviesAlert!, animated: false, completion: nil)
-//    }
     
     // MARK: - Table view data source
     
@@ -129,10 +43,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-// TODO: remove below commented code after checking presenter implementation
-//        if(searchActive) {
-//            return filtered.count
-//        }
+        
         return movies.count
     }
     
@@ -147,13 +58,8 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
         var movie: Movie?
         let idx = indexPath.row
         if idx <= movies.count - 1 {
-            // TODO: remove below commented code after checking presenter implementation
-//            if (searchActive) {
-//                movie = filtered[idx]
-//            }
-//            else {
-                movie = movies[idx]
-//            }
+            movie = movies[idx]
+            
             if movie != nil {
                 cell.labelMovie.text = movie?.title
                 // set image by url async
@@ -177,6 +83,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -206,6 +113,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
                 
                 let selectedMovie = movies[indexPath.row]
                 movieDetailViewController.movie = selectedMovie
+                movieDetailViewController.genres = presenter?.getGenres(with: selectedMovie)
                 
             } else {
                 fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
@@ -214,6 +122,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
     
     @IBAction func unwindToMovieList(sender: UIStoryboardSegue) {
+        
         if let sourceViewController = sender.source as? MovieViewController, let movie = sourceViewController.movie {
             
             // Add a new movie.
@@ -238,55 +147,35 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        // TODO: remove below commented code after checking presenter implementation
-//        searchActive = true;
+        
         presenter?.searchActive(searchActive: true)
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        // TODO: remove below commented code after checking presenter implementation
-        //        searchActive = true;
+        
         presenter?.searchActive(searchActive: true)
-
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        // TODO: remove below commented code after checking presenter implementation
-        //        searchActive = true;
+        
         presenter?.searchActive(searchActive: true)
-
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        // TODO: remove below commented code after checking presenter implementation
-        //        searchActive = true;
+        
         presenter?.searchActive(searchActive: true)
-
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         presenter?.searchMovies(with: searchText)
-        
-//        if searchText.count == 0 {
-//            searchActive = false;
-//        } else {
-//            filtered = movies.filter({ (movie) -> Bool in
-//                let tmp: NSString = movie.title! as NSString
-//                let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-//                return range.location != NSNotFound
-//            })
-//            if(filtered.count == 0){
-//                searchActive = false;
-//            } else {
-//                searchActive = true;
-//            }
-//        }
-//
-//        self.tableView.reloadData()
     }
     
     func showMovies(with movies: [Movie]) {
+        
         self.movies = movies
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -296,18 +185,25 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     // MARK: Public methods
     
     func showLoading() {
+        let appName = Utils.getAppName() 
+        
         DispatchQueue.main.async {
-            HUD.show(.progress)
+            let hud = PKHUDProgressView(title: appName, subtitle: Constants.messageLoadingMovies)
+            hud.subtitleLabel.textAlignment = .center
+            PKHUD.sharedHUD.contentView = hud
+            PKHUD.sharedHUD.show()
         }
     }
     
     func hideLoading() {
+        
         DispatchQueue.main.async {
             HUD.hide()
         }
     }
     
     func showError(errorMessage: String) {
+        
         DispatchQueue.main.async {
             HUD.flash(.label(errorMessage), delay: 2.0)
         }

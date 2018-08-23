@@ -91,7 +91,7 @@ class CoreDataManager {
         
         if let genreSelected = genreSelected {
             
-            genreSelected.setValue(isSelected, forKey: Constants.attribute_selected)
+            genreSelected.setValue(isSelected, forKey: Constants.attributeSelected)
             
             saveContext()
             

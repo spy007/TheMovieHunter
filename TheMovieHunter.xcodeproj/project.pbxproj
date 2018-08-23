@@ -31,6 +31,9 @@
 		8A688198212D6B2400FBEDAF /* MovieTableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A688197212D6B2400FBEDAF /* MovieTableProtocols.swift */; };
 		8A68819B212D965000FBEDAF /* MovieTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68819A212D965000FBEDAF /* MovieTablePresenter.swift */; };
 		8A68819E212D971600FBEDAF /* MovieTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68819D212D971600FBEDAF /* MovieTableInteractor.swift */; };
+		8A6881A0212EE23400FBEDAF /* SearchSettingsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A68819F212EE23400FBEDAF /* SearchSettingsProtocols.swift */; };
+		8A6881A2212EE54900FBEDAF /* SearchSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6881A1212EE54900FBEDAF /* SearchSettingsPresenter.swift */; };
+		8A6881A4212EE6F400FBEDAF /* SearchSettingsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6881A3212EE6F400FBEDAF /* SearchSettingsInteractor.swift */; };
 		8A98A3E7211DCF5100B4039F /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A98A3E6211DCF5100B4039F /* AuthorizationViewController.swift */; };
 		8A98A3E9211DD9C200B4039F /* GuestSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A98A3E8211DD9C200B4039F /* GuestSessionResponse.swift */; };
 		8A9EF25320F34C6300188E69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9EF25220F34C6300188E69 /* AppDelegate.swift */; };
@@ -81,6 +84,9 @@
 		8A688197212D6B2400FBEDAF /* MovieTableProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableProtocols.swift; sourceTree = "<group>"; };
 		8A68819A212D965000FBEDAF /* MovieTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTablePresenter.swift; sourceTree = "<group>"; };
 		8A68819D212D971600FBEDAF /* MovieTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableInteractor.swift; sourceTree = "<group>"; };
+		8A68819F212EE23400FBEDAF /* SearchSettingsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsProtocols.swift; sourceTree = "<group>"; };
+		8A6881A1212EE54900FBEDAF /* SearchSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsPresenter.swift; sourceTree = "<group>"; };
+		8A6881A3212EE6F400FBEDAF /* SearchSettingsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsInteractor.swift; sourceTree = "<group>"; };
 		8A98A3E6211DCF5100B4039F /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		8A98A3E8211DD9C200B4039F /* GuestSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestSessionResponse.swift; sourceTree = "<group>"; };
 		8A9EF24F20F34C6300188E69 /* TheMovieHunter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMovieHunter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				8A688197212D6B2400FBEDAF /* MovieTableProtocols.swift */,
+				8A68819F212EE23400FBEDAF /* SearchSettingsProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				8A68819A212D965000FBEDAF /* MovieTablePresenter.swift */,
+				8A6881A1212EE54900FBEDAF /* SearchSettingsPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -202,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				8A68819D212D971600FBEDAF /* MovieTableInteractor.swift */,
+				8A6881A3212EE6F400FBEDAF /* SearchSettingsInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -432,6 +441,7 @@
 				8AF9ACBA2113488800C42B03 /* MovieYearUtils.swift in Sources */,
 				8A435D172123259300541973 /* MoviesTabBarController.swift in Sources */,
 				8A49309C20FE1E4E007E1E46 /* TheMovieHunter.xcdatamodeld in Sources */,
+				8A6881A0212EE23400FBEDAF /* SearchSettingsProtocols.swift in Sources */,
 				8A225A1A20F6132B008D027D /* MoviesResponse.swift in Sources */,
 				8A9EF27320F34F0E00188E69 /* MovieTableViewCell.swift in Sources */,
 				8A9EF25520F34C6300188E69 /* MovieViewController.swift in Sources */,
@@ -442,6 +452,8 @@
 				8A4930A82100ABAD007E1E46 /* UrlManager.swift in Sources */,
 				8A98A3E7211DCF5100B4039F /* AuthorizationViewController.swift in Sources */,
 				8A4930A620FF7981007E1E46 /* Utils.swift in Sources */,
+				8A6881A2212EE54900FBEDAF /* SearchSettingsPresenter.swift in Sources */,
+				8A6881A4212EE6F400FBEDAF /* SearchSettingsInteractor.swift in Sources */,
 				8A688198212D6B2400FBEDAF /* MovieTableProtocols.swift in Sources */,
 				8AF9ACB82113151900C42B03 /* Defaults.swift in Sources */,
 				8A68819E212D971600FBEDAF /* MovieTableInteractor.swift in Sources */,

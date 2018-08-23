@@ -41,4 +41,8 @@ class Utils {
     class func getContext() -> NSManagedObjectContext {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
+    
+    class func getAppName() -> String {
+        return (Bundle.main.infoDictionary?["CFBundleName"] as? String)!
+    }
 }

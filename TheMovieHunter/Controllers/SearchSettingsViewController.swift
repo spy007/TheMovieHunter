@@ -16,29 +16,31 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var lyOfMov: UILabel! // lower year of movies
     @IBOutlet weak var uyOfMov: UILabel! // upper year of movies
     @IBOutlet weak var rangeSlider: RangeSlider!
-    
+    // TODO: remove
     private var genres: [Genre]? = []
     private var genresSelectedDict = [Int:Genre]()
     private var lowerValue: Double? = nil
+    // TODO: remove
     private var mng: CoreDataManager? = nil
+    private var presenter: SearchSettingsPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        presenter = SearchSettingsPresenter()
+        
         self.tableView.dataSource = self
-        
-        self.mng = CoreDataManager()
-        
-        self.genres = self.mng?.getGenres()
-        
-        if let genresSelected = self.mng?.getGenresDict() {
+
+        // TODO: remove
+//        self.mng = CoreDataManager()
+//        self.genres = self.mng?.getGenres()
+//        self.genres = presenter?.getGenresDict()
+        if let genresSelected = presenter?.getGenresDict() {
             if !genresSelected.isEmpty {
                 self.genresSelectedDict = genresSelected
-            } else {
-                print("Fail: genres selected read from core data is empty")
             }
             
-            self.setRangeSlider()
+            self.initRangeSlider()
         } else {
             print("Fail: extracting genres selected from Core Data")
         }
@@ -49,7 +51,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return genres!.count
+        return genresSelectedDict.count
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,14 +62,15 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier") as! GenreTableViewCell
         
-        let genre = genres?[indexPath.row]
+        let genre = Array(genresSelectedDict.values)[indexPath.row]
         
-        cell.labelGenre.text = genre?.name
+        // TODO: remove
+        //genres?[indexPath.row]
         
-        if let id = genre?.id {
+        cell.labelGenre.text = genre.name
+        
+        if let id = genre.id {
             setSwitchView(sw: cell.switchGenre, id: id)
-        } else {
-            print("Fail: id is nil")
         }
         
         return cell
@@ -77,19 +80,30 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     
     private func setSwitchView(sw: UISwitch, id: String) {
         
-        if let id = Int(id) {
+        if let id = Int(id), let isOn = genresSelectedDict[id]?.selected {
             sw.tag = id
-            if !genresSelectedDict.isEmpty {
-                sw.isOn = (genresSelectedDict[id]?.selected)!
-            } else {
-                print("Failed to extract user selected genres")
-            }
+            sw.isOn = isOn
         }
         
         sw.addTarget(self, action: #selector(onSwitchValueChanged(_:)), for: .touchUpInside)
     }
     
-    private func setRangeSlider() {
+    func initRangeSlider(minSlider: Double, maxSlider: Double, minYear: String, maxYear: String) {
+        lowerValue = minSlider
+
+        rangeSlider.lowerValue = minSlider
+        rangeSlider.maximumValue = maxSlider
+        rangeSlider.upperValue = maxSlider
+        
+        lyOfMov.text = minYear
+        uyOfMov.text = maxYear
+        
+        rangeSlider.tintColor = UIColor.green
+        rangeSlider.addTarget(self, action: #selector(rangeSliderValueDidChange(_:)), for: .valueChanged)
+        rangeSlider.addTarget(self, action: #selector(rangeSliderDidEndSliding), for: [.touchUpInside, .touchUpOutside])
+    }
+    
+    private func initRangeSlider() {
         let range = Defaults.getMovieYearsRange()
         let min = range.0 // sets wrong lower value if set value which differs from range.0
         let max = range.1

@@ -35,6 +35,8 @@ protocol  MovieTablePresenterProtocol: class {
     func searchMovies(with searchText: String)
     
     func searchActive(searchActive: Bool)
+    
+    func getGenres(with movie: Movie) -> String
 }
 
 protocol MovieTableInteractorProtocol: class {
@@ -46,4 +48,6 @@ protocol MovieTableInteractorProtocol: class {
     func searchMovies(with searchText: String)
     
     func searchActive(searchActive: Bool)
+    
+    func getGenres(with movie: Movie) -> String
 }

@@ -15,12 +15,6 @@ class MoviesTabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animation: Bool) {
-        super.viewDidAppear(animation)
-        
-        print("viewDidAppear()")
-    }
-    
     /*
     // MARK: - Navigation
 
