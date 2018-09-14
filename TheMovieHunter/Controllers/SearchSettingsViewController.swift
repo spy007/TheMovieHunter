@@ -140,6 +140,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         print("switch changed witch tag=\(tag) isOn=\(isOn)")
         self.mng?.saveUserSelectedGenre(genreSelected: self.genresSelectedDict[tag], isSelected: isOn)
         switchView.isOn = isOn
+        setFlagForUpdateMovies()
     }
     
     @objc func rangeSliderValueDidChange(_ slider:RangeSlider!) {
@@ -159,5 +160,13 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         let uv = rangeSlider.upperValue
         
         Defaults.setMovieYearsRange(movieYear: (lv, uv))
+        setFlagForUpdateMovies()
+    }
+    
+    func setFlagForUpdateMovies() {
+        guard let controller = self.tabBarController as? MoviesTabBarController else{
+            return
+        }
+        controller.shouldUpdateMovies = true
     }
 }

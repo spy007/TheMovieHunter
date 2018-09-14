@@ -13,17 +13,40 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
     weak var view: MovieTableViewProtocol?
     var interactor: MovieTableInteractorProtocol?
     
-    func viewWillAppear(view: MovieTableViewProtocol?) {
-   
+    func viewWillAppear() {
+        guard let controller = try! view?.getTabBarController() as? MoviesTabBarController else {
+            return
+        }
+        if(controller.shouldUpdateMovies){
+            self.requestMoviesData(userFiredAction: false)
+            controller.shouldUpdateMovies = false
+        }
+
+
+
+//        if interactor == nil {
+//            interactor = MovieTableInteractor(presenter: self)
+//        }
+        
+        //view?.showLoading()
+        //interactor?.requestMoviesData()
+    }
+    
+    func viewDidLoad(view: MovieTableViewProtocol?) {
         if self.view == nil {
             self.view = view
         }
         if interactor == nil {
             interactor = MovieTableInteractor(presenter: self)
         }
-            
-        view?.showLoading()
+        requestMoviesData(userFiredAction: false)
+    }
+    
+    func requestMoviesData(userFiredAction: Bool) {
         interactor?.requestMoviesData()
+        if !userFiredAction {
+            view?.showLoading()
+        }
     }
     
     // MARK: Public methods

@@ -51,6 +51,8 @@
 		8AF9ACB82113151900C42B03 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB72113151900C42B03 /* Defaults.swift */; };
 		8AF9ACBA2113488800C42B03 /* MovieYearUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB92113488800C42B03 /* MovieYearUtils.swift */; };
 		A7E007DAF91C96746560C14A /* Pods_TheMovieHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2E04F5C60697228B58389 /* Pods_TheMovieHunter.framework */; };
+		AD4D1E2DA94A891DF05A5635 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D1747A00B176442BF77AD /* Extensions.swift */; };
+		AD4D1E62945A57836AB2B6F7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D1710C7BB46416CB05C6C /* Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +107,8 @@
 		8AF9ACB52110AF8100C42B03 /* icon_movie_tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_movie_tabbar.png; sourceTree = "<group>"; };
 		8AF9ACB72113151900C42B03 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		8AF9ACB92113488800C42B03 /* MovieYearUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieYearUtils.swift; sourceTree = "<group>"; };
+		AD4D1710C7BB46416CB05C6C /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		AD4D1747A00B176442BF77AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FFB491E79C592BA978496EE9 /* Pods-TheMovieHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieHunter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,6 +188,8 @@
 			children = (
 				8AF9ACB72113151900C42B03 /* Defaults.swift */,
 				8A49306A20F8A99B007E1E46 /* Constants.swift */,
+				AD4D1710C7BB46416CB05C6C /* Errors.swift */,
+				AD4D1747A00B176442BF77AD /* Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -410,8 +416,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -420,8 +424,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -466,6 +468,8 @@
 				8A4930A420FF5126007E1E46 /* CoreDataManager.swift in Sources */,
 				8A30B856212C4D8A00DED434 /* VoteControl.swift in Sources */,
 				8A49306B20F8A99B007E1E46 /* Constants.swift in Sources */,
+				AD4D1E62945A57836AB2B6F7 /* Errors.swift in Sources */,
+				AD4D1E2DA94A891DF05A5635 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +630,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Y66EML2JC;
+				DEVELOPMENT_TEAM = 7Y6J9CDRKP;
 				INFOPLIST_FILE = TheMovieHunter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -648,7 +652,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Y66EML2JC;
+				DEVELOPMENT_TEAM = 7Y6J9CDRKP;
 				INFOPLIST_FILE = TheMovieHunter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (

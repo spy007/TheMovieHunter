@@ -11,55 +11,74 @@ import os.log
 import PKHUD
 
 class MovieTableViewController: UITableViewController, UISearchBarDelegate, MovieTableViewProtocol {
-    
+
     //MARK: Properties
-    
+
     // TODO: figure out how not to initialize presenter below like in IOS-Viper-Architecture project
     var presenter: MovieTablePresenterProtocol?
-    var loadingMoviesAlert: UIAlertController? = nil
-    @IBOutlet weak var searchBar: UISearchBar!
-    
+//    var loadingMoviesAlert: UIAlertController? = nil
+    var refreshView : UIRefreshControl? = nil
+    var searchBar: UISearchBar? = nil
     var movies: [Movie] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchBar.delegate = self
+
+        searchBar = UISearchBar()
+        searchBar?.showsCancelButton = false
+        searchBar?.placeholder = "Movies"
+        searchBar?.delegate = self
+        self.navigationItem.titleView = searchBar
+        refreshView = UIRefreshControl()
+        refreshView?.addTarget(self, action: #selector(requestMoviesData(userFiredAction:)), for: .valueChanged)
+        tableView.refreshControl = refreshView
         
         presenter = MovieTablePresenter()
+        presenter?.viewDidLoad(view: self)
     }
-    
+
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-        
-        presenter?.viewWillAppear(view: self)
+        presenter?.viewWillAppear()
     }
-    
+
+    func getTabBarController() throws -> UITabBarController {
+        guard let controller = tabBarController else {
+            throw ControllerErrors.tabBarControllerNotFound(message: "CURRENT CONTROLLER IS NOT A CHILD OF TAB BAR CONTROLLER")
+        }
+        return controller
+    }
+
+    @objc
+    func requestMoviesData(userFiredAction: Bool = true){
+        presenter?.requestMoviesData(userFiredAction: userFiredAction)
+    }
+
     // MARK: - Table view data source
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+
         return movies.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let cellIdentifier = "MovieTableViewCell"
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MovieTableViewCell  else {
             fatalError("The dequeued cell is not an instance of MovieTableViewCell.")
         }
-        
+
         var movie: Movie?
         let idx = indexPath.row
         if idx <= movies.count - 1 {
             movie = movies[idx]
-            
+
             if movie != nil {
                 cell.labelMovie.text = movie?.title
                 // set image by url async
@@ -71,66 +90,71 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
                 }
             }
         }
-        
+
         return cell
     }
-    
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
+
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
+
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.searchBar?.resignFirstResponder()
+    }
+
     // MARK: - Navigation
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         super.prepare(for: segue, sender: sender)
-        
+        self.searchBar?.resignFirstResponder()
+
         if let identifier = segue.identifier {
-            
+
             if identifier == "ShowDetail" {
                 guard let movieDetailViewController = segue.destination as? MovieViewController else {
                     fatalError("Unexpected destination: \(segue.destination)")
                 }
-                
+
                 guard let selectedMovieCell = sender as? MovieTableViewCell else {
-                    fatalError("Unexpected sender: \(sender)")
+                    fatalError("Unexpected sender: \(String(describing: sender))")
                 }
-                
+
                 guard let indexPath = tableView.indexPath(for: selectedMovieCell) else {
                     fatalError("The selected cell is not being displayed by the table")
                 }
-                
+
                 let selectedMovie = movies[indexPath.row]
                 movieDetailViewController.movie = selectedMovie
                 movieDetailViewController.genres = presenter?.getGenres(with: selectedMovie)
-                
+
             } else {
                 fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
             }
         }
     }
-    
+
     @IBAction func unwindToMovieList(sender: UIStoryboardSegue) {
-        
+
         if let sourceViewController = sender.source as? MovieViewController, let movie = sourceViewController.movie {
-            
+
             // Add a new movie.
             let newIndexPath = IndexPath(row: movies.count, section: 0)
-            
+
             movies.append(movie)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
-            
+
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 // Update an existing movie.
                 movies[selectedIndexPath.row] = movie
@@ -139,71 +163,69 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
             else {
                 // Add a new movie.
                 let newIndexPath = IndexPath(row: movies.count, section: 0)
-                
+
                 movies.append(movie)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
+
         presenter?.searchActive(searchActive: true)
     }
-    
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
+
         presenter?.searchActive(searchActive: true)
-        
+
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+
         presenter?.searchActive(searchActive: true)
-        
+
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        presenter?.searchActive(searchActive: true)
-        
+        searchBar.resignFirstResponder()
+        //presenter?.searchActive(searchActive: true)
+
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         presenter?.searchMovies(with: searchText)
     }
-    
+
+    @objc func dismissKeyboard(){
+        self.searchBar?.resignFirstResponder()
+    }
+
     func showMovies(with movies: [Movie]) {
-        
+
         self.movies = movies
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-    
+
     // MARK: Public methods
-    
+
     func showLoading() {
-        let appName = Utils.getAppName() 
-        
         DispatchQueue.main.async {
-            let hud = PKHUDProgressView(title: appName, subtitle: Constants.messageLoadingMovies)
-            hud.subtitleLabel.textAlignment = .center
-            PKHUD.sharedHUD.contentView = hud
-            PKHUD.sharedHUD.show()
+            self.refreshControl?.programaticallyBeginRefreshing(in: self.tableView)
         }
     }
-    
+
     func hideLoading() {
-        
         DispatchQueue.main.async {
-            HUD.hide()
+            self.refreshControl?.endRefreshing()
         }
     }
-    
+
     func showError(errorMessage: String) {
-        
+
         DispatchQueue.main.async {
             HUD.flash(.label(errorMessage), delay: 2.0)
         }

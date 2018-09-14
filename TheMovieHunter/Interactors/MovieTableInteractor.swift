@@ -104,9 +104,11 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                             self.mng?.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
                         }
                     }
-                    if let movs = self.mng?.save(movieResults: movieResults) {
-                        if !movs.isEmpty {
-                            self.movies += movs
+                    DispatchQueue.main.sync {
+                        if let movs = self.mng?.save(movieResults: movieResults) {
+                            if !movs.isEmpty {
+                                self.movies += movs
+                            }
                         }
                     }
                 }
