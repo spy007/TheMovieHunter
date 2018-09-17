@@ -55,7 +55,6 @@ class CoreDataManager {
             }
             saveContext()
         }
-
         return movies
     }
 

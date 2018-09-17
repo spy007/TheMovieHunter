@@ -68,6 +68,12 @@
                                         <constraint firstItem="XOs-ER-DLh" firstAttribute="leading" secondItem="XNF-Aw-9Kr" secondAttribute="trailing" constant="33" id="ycd-Gx-ewH"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="labelMovie" destination="XOs-ER-DLh" id="iaw-Ph-uXZ"/>
+                                    <outlet property="movieImageView" destination="XNF-Aw-9Kr" id="ASP-Un-nQf"/>
+                                    <outlet property="ratingControl" destination="aTF-QF-0NA" id="YlS-mf-HaM"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="414-9d-aHB"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -282,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1314" y="117"/>
+            <point key="canvasLocation" x="2681" y="117"/>
         </scene>
         <!--Search Settings-->
         <scene sceneID="6gL-L2-8ui">
@@ -531,4 +537,7 @@
         <image name="icon_settings_1x.png" width="30" height="30"/>
         <image name="person" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="414-9d-aHB"/>
+    </inferredMetricsTieBreakers>
 </document>

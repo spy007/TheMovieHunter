@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		868187B3214FCEEE00A673A6 /* MovieSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B2214FCEEE00A673A6 /* MovieSearchTableViewController.swift */; };
 		868187B5214FD37F00A673A6 /* MovieSearchTableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */; };
+		868187B7214FE76900A673A6 /* MovieSearchTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */; };
+		868187B9214FE82A00A673A6 /* MovieSearchTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */; };
 		8A1DDBF52105B9DA00657C10 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */; };
 		8A1DDBF62105B9DA00657C10 /* emptyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBF02105B9D900657C10 /* emptyStar.png */; };
 		8A1DDBF72105B9DA00657C10 /* filledStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBF12105B9D900657C10 /* filledStar.png */; };
@@ -62,6 +64,8 @@
 		81538CDFED7591E172EDA10D /* Pods-TheMovieHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieHunter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter.debug.xcconfig"; sourceTree = "<group>"; };
 		868187B2214FCEEE00A673A6 /* MovieSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableViewController.swift; sourceTree = "<group>"; };
 		868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableProtocols.swift; sourceTree = "<group>"; };
+		868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTablePresenter.swift; sourceTree = "<group>"; };
+		868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableInteractor.swift; sourceTree = "<group>"; };
 		8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		8A1DDBF02105B9D900657C10 /* emptyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyStar.png; sourceTree = "<group>"; };
 		8A1DDBF12105B9D900657C10 /* filledStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filledStar.png; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				8A68819A212D965000FBEDAF /* MovieTablePresenter.swift */,
+				868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */,
 				8A6881A1212EE54900FBEDAF /* SearchSettingsPresenter.swift */,
 			);
 			path = Presenters;
@@ -223,6 +228,7 @@
 			children = (
 				8A68819D212D971600FBEDAF /* MovieTableInteractor.swift */,
 				8A6881A3212EE6F400FBEDAF /* SearchSettingsInteractor.swift */,
+				868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -469,11 +475,13 @@
 				8AF9ACB82113151900C42B03 /* Defaults.swift in Sources */,
 				8A68819E212D971600FBEDAF /* MovieTableInteractor.swift in Sources */,
 				8AF9ACAE210F23D300C42B03 /* SearchSettingsViewController.swift in Sources */,
+				868187B7214FE76900A673A6 /* MovieSearchTablePresenter.swift in Sources */,
 				8A4930A220FF31CB007E1E46 /* MovieGenreResponse.swift in Sources */,
 				8A4930A020FF2974007E1E46 /* GenresResponse.swift in Sources */,
 				8AF9ACB02110513600C42B03 /* GenreTableViewCell.swift in Sources */,
 				8A98A3E9211DD9C200B4039F /* GuestSessionResponse.swift in Sources */,
 				8A9EF25320F34C6300188E69 /* AppDelegate.swift in Sources */,
+				868187B9214FE82A00A673A6 /* MovieSearchTableInteractor.swift in Sources */,
 				8A4930A420FF5126007E1E46 /* CoreDataManager.swift in Sources */,
 				8A30B856212C4D8A00DED434 /* VoteControl.swift in Sources */,
 				868187B3214FCEEE00A673A6 /* MovieSearchTableViewController.swift in Sources */,

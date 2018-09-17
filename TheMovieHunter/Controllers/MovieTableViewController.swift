@@ -191,10 +191,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
         presenter.searchMovies(with: searchText)
     }
 
-    @objc func dismissKeyboard(){
-        searchBar.resignFirstResponder()
-    }
-
     func showMovies(with movies: [Movie]) {
 
         self.movies = movies

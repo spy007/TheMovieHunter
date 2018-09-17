@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieSearchTableViewProtocol: class {
-    var presenter: MovieSearchTablePresenterProtocol? { get set }
+    var presenter: MovieSearchTablePresenterProtocol { get set }
     
     // PRESENTER -> VIEW
     func showLoading()
@@ -19,8 +19,6 @@ protocol MovieSearchTableViewProtocol: class {
     func showError(errorMessage: String)
     
     func showMovies(with movies: [Movie])
-    
-    func getTabBarController() throws -> UITabBarController
 }
 
 protocol  MovieSearchTablePresenterProtocol: class {
@@ -28,18 +26,22 @@ protocol  MovieSearchTablePresenterProtocol: class {
     var interactor: MovieSearchTableInteractorProtocol?  { get set }
     
     // VIEW -> PRESENTER
-    func viewDidLoad(view: MovieTableViewProtocol?)
+    func viewDidLoad(view: MovieSearchTableViewProtocol?)
     
     func showError(_ errorMessage: String)
     
     func showMovies(with movies: [Movie])
     
     func searchMovies(with searchText: String)
+    
+    func getGenres(with movie: Movie) -> String
 }
 
 protocol MovieSearchTableInteractorProtocol: class {
-    var presenter: MovieSearchTablePresenterProtocol? { get set }
+    var presenter: MovieSearchTablePresenterProtocol { get set }
     
     // INTERACTOR -> PRESENTER
     func searchMovies(with searchText: String)
+    
+    func getGenres(with movie: Movie) -> String
 }
