@@ -21,15 +21,6 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
             self.requestMoviesData(userFiredAction: false)
             controller.shouldUpdateMovies = false
         }
-
-
-
-//        if interactor == nil {
-//            interactor = MovieTableInteractor(presenter: self)
-//        }
-        
-        //view?.showLoading()
-        //interactor?.requestMoviesData()
     }
     
     func viewDidLoad(view: MovieTableViewProtocol?) {
