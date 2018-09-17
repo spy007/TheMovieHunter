@@ -16,7 +16,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
     // TODO: figure out how not to initialize presenter below like in IOS-Viper-Architecture project
     var presenter: MovieTablePresenterProtocol?
-//    var loadingMoviesAlert: UIAlertController? = nil
     var refreshView : UIRefreshControl? = nil
     var searchBar: UISearchBar? = nil
     var movies: [Movie] = []
@@ -194,7 +193,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
         presenter?.searchMovies(with: searchText)
     }
 
