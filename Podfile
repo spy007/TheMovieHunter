@@ -10,6 +10,7 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'SwiftRangeSlider'
 pod 'PKHUD'
+pod 'Hero'
 end
 
 post_install do |installer|

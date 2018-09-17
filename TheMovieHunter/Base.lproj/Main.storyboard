@@ -6,10 +6,80 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Movie Search Table View Controller-->
+        <scene sceneID="UMN-CH-QjC">
+            <objects>
+                <tableViewController storyboardIdentifier="MovieSearchTableViewController" id="VIy-PH-xOP" customClass="MovieSearchTableViewController" customModule="TheMovieHunter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="N9K-hY-WbN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieTableViewCell" rowHeight="90" id="MoX-q9-uXg" customClass="MovieTableViewCell" customModule="TheMovieHunter" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MoX-q9-uXg" id="PDU-1a-5G2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOs-ER-DLh">
+                                            <rect key="frame" x="157" y="11" width="202" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellTitle"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="XNF-Aw-9Kr">
+                                            <rect key="frame" x="0.0" y="0.0" width="124" height="89.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="XNF-Aw-9Kr" secondAttribute="height" multiplier="124:89" id="Jnl-WA-DMo"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellImage"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="aTF-QF-0NA" customClass="VoteControl" customModule="TheMovieHunter" customModuleProvider="target">
+                                            <rect key="frame" x="157" y="49" width="202" height="30"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="starSize">
+                                                    <size key="value" width="30" height="30"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellRating"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XOs-ER-DLh" firstAttribute="trailing" secondItem="PDU-1a-5G2" secondAttribute="trailingMargin" id="3Ka-i5-3Kl"/>
+                                        <constraint firstItem="aTF-QF-0NA" firstAttribute="trailing" secondItem="PDU-1a-5G2" secondAttribute="trailingMargin" id="9fu-Ig-WJz"/>
+                                        <constraint firstAttribute="bottom" secondItem="XNF-Aw-9Kr" secondAttribute="bottom" id="DpL-Ur-mVc"/>
+                                        <constraint firstItem="aTF-QF-0NA" firstAttribute="bottom" secondItem="PDU-1a-5G2" secondAttribute="bottomMargin" id="Qjv-I1-bJR"/>
+                                        <constraint firstItem="XOs-ER-DLh" firstAttribute="top" secondItem="PDU-1a-5G2" secondAttribute="topMargin" id="Y5q-M3-bKG"/>
+                                        <constraint firstItem="XNF-Aw-9Kr" firstAttribute="leading" secondItem="PDU-1a-5G2" secondAttribute="leading" id="faI-49-NUm"/>
+                                        <constraint firstItem="aTF-QF-0NA" firstAttribute="leading" secondItem="XNF-Aw-9Kr" secondAttribute="trailing" constant="33" id="oTe-4d-reE"/>
+                                        <constraint firstItem="XNF-Aw-9Kr" firstAttribute="top" secondItem="PDU-1a-5G2" secondAttribute="top" id="sWT-L8-TA0"/>
+                                        <constraint firstItem="XOs-ER-DLh" firstAttribute="leading" secondItem="XNF-Aw-9Kr" secondAttribute="trailing" constant="33" id="ycd-Gx-ewH"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VIy-PH-xOP" id="5hA-vN-Ycu"/>
+                            <outlet property="delegate" destination="VIy-PH-xOP" id="aga-tj-x4s"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U2b-rY-A45" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1312.8" y="-627.4362818590705"/>
+        </scene>
         <!--Movies-->
         <scene sceneID="8px-Jb-iaH">
             <objects>
@@ -26,27 +96,45 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="sSf-vC-irR">
-                                            <rect key="frame" x="0.0" y="0.0" width="122" height="88"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="sSf-vC-irR">
+                                            <rect key="frame" x="0.0" y="0.0" width="124" height="89.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="sSf-vC-irR" secondAttribute="height" multiplier="61:44" id="pxO-8D-nCK"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellImage"/>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="U24-HN-mOU" customClass="VoteControl" customModule="TheMovieHunter" customModuleProvider="target">
-                                            <rect key="frame" x="163" y="44" width="196" height="28"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2m-7w-ulp">
+                                            <rect key="frame" x="157" y="11" width="202" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellTitle"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="U24-HN-mOU" customClass="VoteControl" customModule="TheMovieHunter" customModuleProvider="target">
+                                            <rect key="frame" x="157" y="51" width="202" height="28"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                                     <size key="value" width="30" height="30"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellRating"/>
                                             </userDefinedRuntimeAttributes>
                                         </stackView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2m-7w-ulp">
-                                            <rect key="frame" x="145" y="11" width="214" height="25"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="sSf-vC-irR" firstAttribute="leading" secondItem="uCY-Ec-17L" secondAttribute="leading" id="2B3-yb-r3c"/>
+                                        <constraint firstAttribute="bottom" secondItem="sSf-vC-irR" secondAttribute="bottom" id="8BZ-E1-HbP"/>
+                                        <constraint firstItem="U24-HN-mOU" firstAttribute="leading" secondItem="sSf-vC-irR" secondAttribute="trailing" constant="33" id="KHD-9o-ia9"/>
+                                        <constraint firstItem="sSf-vC-irR" firstAttribute="top" secondItem="uCY-Ec-17L" secondAttribute="top" id="NKB-Bz-gp9"/>
+                                        <constraint firstItem="r2m-7w-ulp" firstAttribute="leading" secondItem="sSf-vC-irR" secondAttribute="trailing" constant="33" id="bOm-Cr-EJ7"/>
+                                        <constraint firstItem="r2m-7w-ulp" firstAttribute="trailing" secondItem="uCY-Ec-17L" secondAttribute="trailingMargin" id="egi-oP-hbI"/>
+                                        <constraint firstItem="U24-HN-mOU" firstAttribute="bottom" secondItem="uCY-Ec-17L" secondAttribute="bottomMargin" id="iup-cI-aA3"/>
+                                        <constraint firstItem="r2m-7w-ulp" firstAttribute="top" secondItem="uCY-Ec-17L" secondAttribute="topMargin" id="rAh-sT-IYs"/>
+                                        <constraint firstItem="U24-HN-mOU" firstAttribute="trailing" secondItem="uCY-Ec-17L" secondAttribute="trailingMargin" id="ucw-e7-TbG"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="labelMovie" destination="r2m-7w-ulp" id="Bdf-9x-VOW"/>
@@ -63,6 +151,12 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="NyR-Un-LZE"/>
                     <navigationItem key="navigationItem" title="Movies" id="wJA-Gs-wMa"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="VIy-PH-xOP" kind="show" identifier="ShowSearch" id="MVZ-sD-ocV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wad-Pr-qJk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -82,20 +176,18 @@
                                     <constraint firstAttribute="width" constant="317" id="j0K-6N-i63"/>
                                     <constraint firstAttribute="height" constant="225" id="rZo-Ha-hgx"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellImage"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fLQ-mj-WV2">
-                                <rect key="frame" x="29" y="357" width="338" height="99"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="to0-yn-AT1">
                                 <rect key="frame" x="16" y="82" width="343" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellTitle"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NaP-qC-4aK">
                                 <rect key="frame" x="23" y="533" width="328" height="19"/>
@@ -146,12 +238,21 @@
                                     <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                         <size key="value" width="40" height="40"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellRating"/>
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="person" translatesAutoresizingMaskIntoConstraints="NO" id="tUN-6G-tOM">
                                 <rect key="frame" x="133" y="471" width="27" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fLQ-mj-WV2">
+                                <rect key="frame" x="18" y="349" width="338" height="99"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -164,6 +265,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="labelCaptionReleaseDate" destination="uf0-Ca-wOO" id="SHk-KL-Dcu"/>
                         <outlet property="labelGenres" destination="r3G-kM-z1c" id="Ih9-oV-vwp"/>
@@ -193,7 +297,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" rowHeight="55" id="xwM-4I-017" customClass="GenreTableViewCell" customModule="TheMovieHunter" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellReuseIdentifier" rowHeight="55" id="xwM-4I-017" customClass="GenreTableViewCell" customModule="TheMovieHunter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="329" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xwM-4I-017" id="gsF-Ru-G2J">
@@ -208,7 +312,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I6o-a7-dk3">
-                                                    <rect key="frame" x="327" y="11" width="51" height="31"/>
+                                                    <rect key="frame" x="272" y="11" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -297,6 +401,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="eyU-zg-zKU" kind="relationship" relationship="rootViewController" id="SIA-7f-rPu"/>
                     </connections>

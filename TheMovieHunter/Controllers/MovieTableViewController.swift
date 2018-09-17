@@ -11,42 +11,29 @@ import os.log
 import PKHUD
 
 class MovieTableViewController: UITableViewController, UISearchBarDelegate, MovieTableViewProtocol {
-
     //MARK: Properties
 
     // TODO: figure out how not to initialize presenter below like in IOS-Viper-Architecture project
-    var presenter: MovieTablePresenterProtocol?
-    var refreshView : UIRefreshControl? = nil
-    var searchBar: UISearchBar? = nil
+    var presenter: MovieTablePresenterProtocol = MovieTablePresenter()
+    var refreshView : UIRefreshControl = UIRefreshControl()
+    var searchBar: UISearchBar = UISearchBar()
     var movies: [Movie] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        searchBar = UISearchBar()
-        if let searchBar = searchBar {
-            searchBar.showsCancelButton = false
-            searchBar.placeholder = "Movies"
-            searchBar.delegate = self
-            self.navigationItem.titleView = searchBar
-        }
-        refreshView = UIRefreshControl()
-        if let refreshView = refreshView {
-            refreshView.addTarget(self, action: #selector(requestMoviesData(userFiredAction:)), for: .valueChanged)
-            tableView.refreshControl = refreshView
-        }
-        
-        presenter = MovieTablePresenter()
-        if let presenter = presenter {
-            presenter.viewDidLoad(view: self)
-        }
+        searchBar.showsCancelButton = false
+        searchBar.placeholder = "Search"
+        searchBar.delegate = self
+        self.navigationItem.titleView = searchBar
+        refreshView.addTarget(self, action: #selector(requestMoviesData(userFiredAction:)), for: .valueChanged)
+        tableView.refreshControl = refreshView
+        presenter.viewDidLoad(view: self)
     }
 
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-        if let presenter = presenter {
-            presenter.viewWillAppear()
-        }
+        presenter.viewWillAppear()
     }
 
     func getTabBarController() throws -> UITabBarController {
@@ -58,9 +45,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
     @objc
     func requestMoviesData(userFiredAction: Bool = true){
-        if let presenter = presenter {
-            presenter.requestMoviesData(userFiredAction: userFiredAction)
-        }
+        presenter.requestMoviesData(userFiredAction: userFiredAction)
     }
 
     // MARK: - Table view data source
@@ -118,9 +103,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        if let searchBar = searchBar {
-            searchBar.resignFirstResponder()
-        }
+        searchBar.resignFirstResponder()
     }
 
     // MARK: - Navigation
@@ -129,9 +112,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
         super.prepare(for: segue, sender: sender)
         
-        if let searchBar = searchBar {
-            searchBar.resignFirstResponder()
-        }
+        searchBar.resignFirstResponder()
         
         if let identifier = segue.identifier {
 
@@ -150,9 +131,11 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
                 let selectedMovie = movies[indexPath.row]
                 movieDetailViewController.movie = selectedMovie
-                movieDetailViewController.genres = presenter?.getGenres(with: selectedMovie)
+                movieDetailViewController.genres = presenter.getGenres(with: selectedMovie)
 
-            } else {
+            } else if identifier == "ShowSearch" {
+                return
+            } else{
                 fatalError("Unexpected Segue Identifier; \(segue.identifier ?? "")")
             }
         }
@@ -183,22 +166,21 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
         }
     }
 
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        performSegue(withIdentifier: "ShowSearch", sender: searchBar)
+        return false
+    }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        if let presenter = presenter {
-            presenter.searchActive(searchActive: true)
-        }
+        presenter.searchActive(searchActive: true)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if let presenter = presenter {
-            presenter.searchActive(searchActive: true)
-        }
+        presenter.searchActive(searchActive: true)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if let presenter = presenter {
-            presenter.searchActive(searchActive: true)
-        }
+        presenter.searchActive(searchActive: true)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -206,15 +188,11 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let presenter = presenter {
-            presenter.searchMovies(with: searchText)
-        }
+        presenter.searchMovies(with: searchText)
     }
 
     @objc func dismissKeyboard(){
-        if let searchBar = searchBar {
-            searchBar.resignFirstResponder()
-        }
+        searchBar.resignFirstResponder()
     }
 
     func showMovies(with movies: [Movie]) {
@@ -229,17 +207,13 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
     func showLoading() {
         DispatchQueue.main.async {
-            if let refreshControl = self.refreshControl {
-                refreshControl.programaticallyBeginRefreshing(in: self.tableView)
-            }
+            self.refreshControl?.programaticallyBeginRefreshing(in: self.tableView)
         }
     }
 
     func hideLoading() {
         DispatchQueue.main.async {
-            if let refreshControl = self.refreshControl {
-                refreshControl.endRefreshing()
-            }
+            self.refreshControl?.endRefreshing()
         }
     }
 

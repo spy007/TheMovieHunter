@@ -9,15 +9,14 @@
 import Foundation
 
 class MovieTableInteractor: MovieTableInteractorProtocol {
-    
     // MARK: Properties
     
     private var movies: [Movie] = []
     private var mng: CoreDataManager? = nil
-    weak var presenter: MovieTablePresenterProtocol?
+    var presenter: MovieTablePresenterProtocol
     private var searchActive : Bool = false
     
-    init(presenter: MovieTablePresenterProtocol?) {
+    init(presenter: MovieTablePresenterProtocol) {
         
         self.presenter = presenter
         
@@ -39,7 +38,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                     self.mng?.save(genresResponse: genres)
                     self.loadMovies()
                 } else {
-                    self.presenter?.showError(Constants.errorRequestGenres)
+                    self.presenter.showError(Constants.errorRequestGenres)
                 }
                 
                 }.resume()
@@ -74,7 +73,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
             searchMovies = movies
         }
         if let searchMovies = searchMovies {
-            presenter?.showMovies(with: searchMovies)
+            presenter.showMovies(with: searchMovies)
         }
     }
     
@@ -113,9 +112,9 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                 
                 if y == maxYear {
                     if !self.movies.isEmpty {
-                        self.presenter?.showMovies(with: self.movies)
+                        self.presenter.showMovies(with: self.movies)
                     } else {
-                        self.presenter?.showError(Constants.errorRequestMovies)
+                        self.presenter.showError(Constants.errorRequestMovies)
                     }
                 } 
                 
