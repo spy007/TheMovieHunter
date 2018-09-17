@@ -24,21 +24,29 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
         super.viewDidLoad()
 
         searchBar = UISearchBar()
-        searchBar?.showsCancelButton = false
-        searchBar?.placeholder = "Movies"
-        searchBar?.delegate = self
-        self.navigationItem.titleView = searchBar
+        if let searchBar = searchBar {
+            searchBar.showsCancelButton = false
+            searchBar.placeholder = "Movies"
+            searchBar.delegate = self
+            self.navigationItem.titleView = searchBar
+        }
         refreshView = UIRefreshControl()
-        refreshView?.addTarget(self, action: #selector(requestMoviesData(userFiredAction:)), for: .valueChanged)
-        tableView.refreshControl = refreshView
+        if let refreshView = refreshView {
+            refreshView.addTarget(self, action: #selector(requestMoviesData(userFiredAction:)), for: .valueChanged)
+            tableView.refreshControl = refreshView
+        }
         
         presenter = MovieTablePresenter()
-        presenter?.viewDidLoad(view: self)
+        if let presenter = presenter {
+            presenter.viewDidLoad(view: self)
+        }
     }
 
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-        presenter?.viewWillAppear()
+        if let presenter = presenter {
+            presenter.viewWillAppear()
+        }
     }
 
     func getTabBarController() throws -> UITabBarController {
@@ -50,7 +58,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
     @objc
     func requestMoviesData(userFiredAction: Bool = true){
-        presenter?.requestMoviesData(userFiredAction: userFiredAction)
+        if let presenter = presenter {
+            presenter.requestMoviesData(userFiredAction: userFiredAction)
+        }
     }
 
     // MARK: - Table view data source
@@ -61,7 +71,6 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return movies.count
     }
 
@@ -96,7 +105,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
 
     // Override to support editing the table view.
@@ -109,7 +118,9 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.searchBar?.resignFirstResponder()
+        if let searchBar = searchBar {
+            searchBar.resignFirstResponder()
+        }
     }
 
     // MARK: - Navigation
@@ -117,8 +128,11 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         super.prepare(for: segue, sender: sender)
-        self.searchBar?.resignFirstResponder()
-
+        
+        if let searchBar = searchBar {
+            searchBar.resignFirstResponder()
+        }
+        
         if let identifier = segue.identifier {
 
             if identifier == "ShowDetail" {
@@ -170,34 +184,37 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-
-        presenter?.searchActive(searchActive: true)
+        if let presenter = presenter {
+            presenter.searchActive(searchActive: true)
+        }
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-
-        presenter?.searchActive(searchActive: true)
-
+        if let presenter = presenter {
+            presenter.searchActive(searchActive: true)
+        }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-
-        presenter?.searchActive(searchActive: true)
-
+        if let presenter = presenter {
+            presenter.searchActive(searchActive: true)
+        }
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        //presenter?.searchActive(searchActive: true)
-
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter?.searchMovies(with: searchText)
+        if let presenter = presenter {
+            presenter.searchMovies(with: searchText)
+        }
     }
 
     @objc func dismissKeyboard(){
-        self.searchBar?.resignFirstResponder()
+        if let searchBar = searchBar {
+            searchBar.resignFirstResponder()
+        }
     }
 
     func showMovies(with movies: [Movie]) {
@@ -212,18 +229,21 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
     func showLoading() {
         DispatchQueue.main.async {
-            self.refreshControl?.programaticallyBeginRefreshing(in: self.tableView)
+            if let refreshControl = self.refreshControl {
+                refreshControl.programaticallyBeginRefreshing(in: self.tableView)
+            }
         }
     }
 
     func hideLoading() {
         DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
+            if let refreshControl = self.refreshControl {
+                refreshControl.endRefreshing()
+            }
         }
     }
 
     func showError(errorMessage: String) {
-
         DispatchQueue.main.async {
             HUD.flash(.label(errorMessage), delay: 2.0)
         }

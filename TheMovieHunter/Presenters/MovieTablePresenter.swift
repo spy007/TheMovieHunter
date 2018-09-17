@@ -34,9 +34,13 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
     }
     
     func requestMoviesData(userFiredAction: Bool) {
-        interactor?.requestMoviesData()
-        if !userFiredAction {
-            view?.showLoading()
+        if let interactor = interactor {
+            interactor.requestMoviesData()
+            if !userFiredAction {
+                if let view = view {
+                    view.showLoading()
+                }
+            }
         }
     }
     
@@ -44,33 +48,36 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
     
     func getGenres(with movie: Movie) -> String {
         var genres = ""
-        
-        if let gens = interactor?.getGenres(with: movie) {
-            genres = gens
+        if let interactor = interactor {
+            genres = interactor.getGenres(with: movie)
         }
-        
         return genres
     }
     
     func showError(_ errorMessage: String) {
   
         print(errorMessage)
-        view?.showError(errorMessage: errorMessage)
+        if let view = view {
+            view.showError(errorMessage: errorMessage)
+        }
     }
     
     func showMovies(with movies: [Movie]) {
-
-        view?.showMovies(with: movies)
-        view?.hideLoading()
+        if let view = view {
+            view.showMovies(with: movies)
+            view.hideLoading()
+        }
     }
     
     func searchMovies(with searchText: String) {
- 
-        interactor?.searchMovies(with: searchText)
+        if let interactor = interactor {
+            interactor.searchMovies(with: searchText)
+        }
     }
     
     func searchActive(searchActive: Bool) {
- 
-        interactor?.searchActive(searchActive: searchActive)
+        if let interactor = interactor {
+            interactor.searchActive(searchActive: searchActive)
+        }
     }
 }

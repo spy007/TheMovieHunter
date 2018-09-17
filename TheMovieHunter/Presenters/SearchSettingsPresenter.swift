@@ -17,6 +17,10 @@ class SearchSettingsPresenter: SearchSettingsPresenterProtocol {
     }
     
     func getGenresDict() -> [Int:Genre]? {
-        return interactor?.getGenresDict()
+        guard let interactor = interactor
+            else {
+                return nil
+        }
+        return interactor.getGenresDict()
     }
 }
