@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		868187B3214FCEEE00A673A6 /* MovieSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B2214FCEEE00A673A6 /* MovieSearchTableViewController.swift */; };
+		868187B5214FD37F00A673A6 /* MovieSearchTableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */; };
+		868187B7214FE76900A673A6 /* MovieSearchTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */; };
+		868187B9214FE82A00A673A6 /* MovieSearchTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */; };
 		8A1DDBF52105B9DA00657C10 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */; };
 		8A1DDBF62105B9DA00657C10 /* emptyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBF02105B9D900657C10 /* emptyStar.png */; };
 		8A1DDBF72105B9DA00657C10 /* filledStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBF12105B9D900657C10 /* filledStar.png */; };
@@ -51,11 +55,17 @@
 		8AF9ACB82113151900C42B03 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB72113151900C42B03 /* Defaults.swift */; };
 		8AF9ACBA2113488800C42B03 /* MovieYearUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9ACB92113488800C42B03 /* MovieYearUtils.swift */; };
 		A7E007DAF91C96746560C14A /* Pods_TheMovieHunter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B2E04F5C60697228B58389 /* Pods_TheMovieHunter.framework */; };
+		AD4D1E2DA94A891DF05A5635 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D1747A00B176442BF77AD /* Extensions.swift */; };
+		AD4D1E62945A57836AB2B6F7 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4D1710C7BB46416CB05C6C /* Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		44B2E04F5C60697228B58389 /* Pods_TheMovieHunter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheMovieHunter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81538CDFED7591E172EDA10D /* Pods-TheMovieHunter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieHunter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter.debug.xcconfig"; sourceTree = "<group>"; };
+		868187B2214FCEEE00A673A6 /* MovieSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableViewController.swift; sourceTree = "<group>"; };
+		868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableProtocols.swift; sourceTree = "<group>"; };
+		868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTablePresenter.swift; sourceTree = "<group>"; };
+		868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableInteractor.swift; sourceTree = "<group>"; };
 		8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		8A1DDBF02105B9D900657C10 /* emptyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyStar.png; sourceTree = "<group>"; };
 		8A1DDBF12105B9D900657C10 /* filledStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filledStar.png; sourceTree = "<group>"; };
@@ -105,6 +115,8 @@
 		8AF9ACB52110AF8100C42B03 /* icon_movie_tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_movie_tabbar.png; sourceTree = "<group>"; };
 		8AF9ACB72113151900C42B03 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		8AF9ACB92113488800C42B03 /* MovieYearUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieYearUtils.swift; sourceTree = "<group>"; };
+		AD4D1710C7BB46416CB05C6C /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		AD4D1747A00B176442BF77AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FFB491E79C592BA978496EE9 /* Pods-TheMovieHunter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheMovieHunter.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +178,7 @@
 				8A9EF27420F3531000188E69 /* MovieTableViewController.swift */,
 				8A9EF25420F34C6300188E69 /* MovieViewController.swift */,
 				8AF9ACAD210F23D300C42B03 /* SearchSettingsViewController.swift */,
+				868187B2214FCEEE00A673A6 /* MovieSearchTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -184,6 +197,8 @@
 			children = (
 				8AF9ACB72113151900C42B03 /* Defaults.swift */,
 				8A49306A20F8A99B007E1E46 /* Constants.swift */,
+				AD4D1710C7BB46416CB05C6C /* Errors.swift */,
+				AD4D1747A00B176442BF77AD /* Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -193,6 +208,7 @@
 			children = (
 				8A688197212D6B2400FBEDAF /* MovieTableProtocols.swift */,
 				8A68819F212EE23400FBEDAF /* SearchSettingsProtocols.swift */,
+				868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -201,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				8A68819A212D965000FBEDAF /* MovieTablePresenter.swift */,
+				868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */,
 				8A6881A1212EE54900FBEDAF /* SearchSettingsPresenter.swift */,
 			);
 			path = Presenters;
@@ -211,6 +228,7 @@
 			children = (
 				8A68819D212D971600FBEDAF /* MovieTableInteractor.swift */,
 				8A6881A3212EE6F400FBEDAF /* SearchSettingsInteractor.swift */,
+				868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -409,9 +427,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -419,9 +436,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRangeSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -453,19 +469,25 @@
 				8A98A3E7211DCF5100B4039F /* AuthorizationViewController.swift in Sources */,
 				8A4930A620FF7981007E1E46 /* Utils.swift in Sources */,
 				8A6881A2212EE54900FBEDAF /* SearchSettingsPresenter.swift in Sources */,
+				868187B5214FD37F00A673A6 /* MovieSearchTableProtocols.swift in Sources */,
 				8A6881A4212EE6F400FBEDAF /* SearchSettingsInteractor.swift in Sources */,
 				8A688198212D6B2400FBEDAF /* MovieTableProtocols.swift in Sources */,
 				8AF9ACB82113151900C42B03 /* Defaults.swift in Sources */,
 				8A68819E212D971600FBEDAF /* MovieTableInteractor.swift in Sources */,
 				8AF9ACAE210F23D300C42B03 /* SearchSettingsViewController.swift in Sources */,
+				868187B7214FE76900A673A6 /* MovieSearchTablePresenter.swift in Sources */,
 				8A4930A220FF31CB007E1E46 /* MovieGenreResponse.swift in Sources */,
 				8A4930A020FF2974007E1E46 /* GenresResponse.swift in Sources */,
 				8AF9ACB02110513600C42B03 /* GenreTableViewCell.swift in Sources */,
 				8A98A3E9211DD9C200B4039F /* GuestSessionResponse.swift in Sources */,
 				8A9EF25320F34C6300188E69 /* AppDelegate.swift in Sources */,
+				868187B9214FE82A00A673A6 /* MovieSearchTableInteractor.swift in Sources */,
 				8A4930A420FF5126007E1E46 /* CoreDataManager.swift in Sources */,
 				8A30B856212C4D8A00DED434 /* VoteControl.swift in Sources */,
+				868187B3214FCEEE00A673A6 /* MovieSearchTableViewController.swift in Sources */,
 				8A49306B20F8A99B007E1E46 /* Constants.swift in Sources */,
+				AD4D1E62945A57836AB2B6F7 /* Errors.swift in Sources */,
+				AD4D1E2DA94A891DF05A5635 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +648,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Y66EML2JC;
+				DEVELOPMENT_TEAM = 7Y6J9CDRKP;
 				INFOPLIST_FILE = TheMovieHunter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -648,7 +670,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Y66EML2JC;
+				DEVELOPMENT_TEAM = 7Y6J9CDRKP;
 				INFOPLIST_FILE = TheMovieHunter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (

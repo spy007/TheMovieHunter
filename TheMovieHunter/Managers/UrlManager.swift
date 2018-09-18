@@ -18,6 +18,7 @@ class UrlManager {
     public static let api_key = "api_key=8a804ccd6e2b680e77ab60f86dc27bb6"
     public static let token = "/authentication/token/new"
     public static let validate_with_login = "/authentication/token/validate_with_login"
+    public static let search = "/search/movie"
     
     class func getImageUrl(imgPath: String) -> URL {
         return URL(string: base_image_url + imgPath)!
@@ -29,6 +30,10 @@ class UrlManager {
     
     class func getMoviesUrlByYear(year: Int) -> URL {
         return URL(string: base_url + "/discover/movie?with_genres=12&primary_release_year=\(year)" + "&" + api_key)!
+    }
+    
+    class func getMoviesBySearch(query: String) -> URL {
+        return URL(string: base_url + search + "?"+api_key+"&query=\(query)&page=1&include_adult=false")!
     }
     
     class func getGuestSession() -> URL {

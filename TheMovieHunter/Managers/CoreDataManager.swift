@@ -11,24 +11,25 @@ import CoreData
 import UIKit
 
 class CoreDataManager {
-    
+
     let managedContext = Utils.getContext()
-    
+
     // MARK: Movies
-    
+
     func save(movieResults: [MovieResponse]?) -> [Movie] {
-        
-        
+
+        let localContext = Utils.getContext()
+
         
         var movies: [Movie] = []
         let userIds = getGenreIds()
-        
+
         if let movs = movieResults {
             for mov in movs {
                 let ids = Set<Int>(mov.genre_ids!)
-                
+
                 if !ids.intersection(userIds).isEmpty {
-                    let movie = Movie(context: managedContext)
+                    let movie = Movie(context: localContext)
                     if let id = movie.id {
                         movie.id = String("\(id)")
                     }
@@ -40,7 +41,7 @@ class CoreDataManager {
                     movie.release_date = mov.release_date
                     // set genres
                     for id in ids {
-                        let genreId = GenreId(context: managedContext)
+                        let genreId = GenreId(context: localContext)
                         genreId.id = "\(id)"
                         movie.addToGenreIds(genreId)
                     }
@@ -48,71 +49,69 @@ class CoreDataManager {
                         movie.vote_count = String("\(vote)")
                     }
                     movie.vote_average = mov.vote_average!
-                    
+
                     movies.append(movie)
                 }
             }
-            
             saveContext()
         }
-        
         return movies
     }
-    
+
     func getMovies() -> [Movie] {
         var movsDb: [Movie]? = nil
-        
+
         do {
             movsDb = try managedContext.fetch(Movie.fetchRequest())
         } catch {
             print("Failed to fetch movies from Core Data")
         }
-        
+
         return movsDb!
     }
-    
+
     func getGenreIds() -> Set<Int> {
         var ids = Set<Int>()
         if let genres = getGenres() {
-            
+
             for genre in genres {
                 if genre.selected {
                     ids.insert(Int(genre.id!)!)
                 }
             }
         }
-        
+
         return ids
     }
-    
+
     // MARK: Genres
 
     func saveUserSelectedGenre(genreSelected: Genre?, isSelected: Bool) {
-        
+
         if let genreSelected = genreSelected {
-            
+
             genreSelected.setValue(isSelected, forKey: Constants.attributeSelected)
-            
+
             saveContext()
-            
+
             Defaults.setSelectedGenres()
         }
     }
-    
+
     func save(genresResponse: [MovieGenreResponse]) {
         var genres = [Genre]()
-        
+
         for gen in genresResponse {
             let genre = Genre(context: managedContext)
             if let id = gen.id {
                 genre.id = String("\(id)")
             }
             genre.name = gen.name
-            
+
             genres.append(genre)
         }
     }
-    
+
     func getGenres() -> [Genre]? {
         var genresDb: [Genre]? = nil
         // ordering by name
@@ -124,28 +123,28 @@ class CoreDataManager {
         } catch {
             print("Failed to fetch genres from Core Data")
         }
-        
+
         return genresDb
     }
-    
+
     func getGenresDict() -> [Int:Genre]? {
         let genres = getGenres()
-        
+
         var genresDict = [Int:Genre]()
-        
+
         for genre in genres! {
             let id = Int(genre.id!)
             genresDict[id!] = genre
-            
+
         }
-        
+
         return genresDict
     }
 
     func deleteAllData(entity: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
-        
+
         do
         {
             let results = try managedContext.fetch(fetchRequest)
@@ -158,7 +157,7 @@ class CoreDataManager {
             print("Delete all data in \(entity) error : \(error) \(error.userInfo)")
         }
     }
-    
+
     func getGenreNamesSequence(movie: Movie) -> String {
         var genresSeq = ""
         var idx = 0
@@ -173,21 +172,21 @@ class CoreDataManager {
                 idx += 1
             }
         }
-        
+
         return genresSeq
     }
-    
+
     func getGenresDict(genres: [MovieGenreResponse]?) -> [Int: String] {
-        
+
         var dictGenres = [Int: String]()
-        
+
         for genre in genres! {
             dictGenres.updateValue((genre.name)!, forKey: (genre.id)!)
         }
-        
+
         return dictGenres
     }
-    
+
     func saveContext() {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }

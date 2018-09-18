@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieTableViewProtocol: class {
-    var presenter: MovieTablePresenterProtocol? { get set }
+    var presenter: MovieTablePresenterProtocol { get set }
     
     // PRESENTER -> VIEW
     func showLoading()
@@ -19,14 +19,20 @@ protocol MovieTableViewProtocol: class {
     func showError(errorMessage: String)
     
     func showMovies(with movies: [Movie])
+
+    func getTabBarController() throws -> UITabBarController
 }
 
 protocol  MovieTablePresenterProtocol: class {
     var view: MovieTableViewProtocol?  { get set }
-    var interactor: MovieTableInteractorProtocol?  { get set }
+    var interactor: MovieTableInteractorProtocol  { get set }
     
     // VIEW -> PRESENTER
-    func viewWillAppear(view: MovieTableViewProtocol?)
+    func viewWillAppear()
+    
+    func viewDidLoad(view: MovieTableViewProtocol?)
+    
+    func requestMoviesData(userFiredAction: Bool)
     
     func showError(_ errorMessage: String)
     
@@ -40,7 +46,7 @@ protocol  MovieTablePresenterProtocol: class {
 }
 
 protocol MovieTableInteractorProtocol: class {
-    var presenter: MovieTablePresenterProtocol? { get set }
+    var presenter: MovieTablePresenterProtocol { get set }
     
     // INTERACTOR -> PRESENTER
     func requestMoviesData()

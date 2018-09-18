@@ -11,52 +11,60 @@ import Foundation
 class MovieTablePresenter: MovieTablePresenterProtocol {
         // TODO: figure out how not to initialize view and interactor below like in IOS-Viper-Architecture project
     weak var view: MovieTableViewProtocol?
-    var interactor: MovieTableInteractorProtocol?
+    lazy var interactor: MovieTableInteractorProtocol = MovieTableInteractor(presenter: self)
     
-    func viewWillAppear(view: MovieTableViewProtocol?) {
-   
+    func viewWillAppear() {
+        guard let controller = try! view?.getTabBarController() as? MoviesTabBarController else {
+            return
+        }
+        if(controller.shouldUpdateMovies){
+            self.requestMoviesData(userFiredAction: false)
+            controller.shouldUpdateMovies = false
+        }
+    }
+    
+    func viewDidLoad(view: MovieTableViewProtocol?) {
         if self.view == nil {
             self.view = view
         }
-        if interactor == nil {
-            interactor = MovieTableInteractor(presenter: self)
+        requestMoviesData(userFiredAction: false)
+    }
+    
+    func requestMoviesData(userFiredAction: Bool) {
+        interactor.requestMoviesData()
+        if !userFiredAction {
+            if let view = view {
+                view.showLoading()
+            }
         }
-            
-        view?.showLoading()
-        interactor?.requestMoviesData()
     }
     
     // MARK: Public methods
     
     func getGenres(with movie: Movie) -> String {
-        var genres = ""
-        
-        if let gens = interactor?.getGenres(with: movie) {
-            genres = gens
-        }
-        
-        return genres
+        return interactor.getGenres(with: movie)
     }
     
     func showError(_ errorMessage: String) {
   
         print(errorMessage)
-        view?.showError(errorMessage: errorMessage)
+        if let view = view {
+            view.showError(errorMessage: errorMessage)
+        }
     }
     
     func showMovies(with movies: [Movie]) {
-
-        view?.showMovies(with: movies)
-        view?.hideLoading()
+        if let view = view {
+            view.showMovies(with: movies)
+            view.hideLoading()
+        }
     }
     
     func searchMovies(with searchText: String) {
- 
-        interactor?.searchMovies(with: searchText)
+        interactor.searchMovies(with: searchText)
     }
     
     func searchActive(searchActive: Bool) {
- 
-        interactor?.searchActive(searchActive: searchActive)
+        interactor.searchActive(searchActive: searchActive)
     }
 }
