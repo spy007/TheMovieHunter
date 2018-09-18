@@ -12,7 +12,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
     // MARK: Properties
     
     private var movies: [Movie] = []
-    private var mng: CoreDataManager? = nil
+    private var mng: CoreDataManager
     var presenter: MovieTablePresenterProtocol
     private var searchActive : Bool = false
     
@@ -35,7 +35,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                 let genresJson = try? jsonDecoder.decode(GenresResponse.self, from: data!)
                 
                 if let genres = genresJson?.genres {
-                    self.mng?.save(genresResponse: genres)
+                    self.mng.save(genresResponse: genres)
                     self.loadMovies()
                 } else {
                     self.presenter.showError(Constants.errorRequestGenres)
@@ -81,7 +81,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
     
     private func loadMovies() {
         
-        self.mng?.deleteAllData(entity: String(describing: Movie.self))
+        self.mng.deleteAllData(entity: String(describing: Movie.self))
         
         let moviesYearRange = Defaults.getMovieYearsRange()
         let maxYear = Int(moviesYearRange.1)
@@ -99,14 +99,13 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
                 if let movieResults = responseModel!.results {
                     if !Defaults.keyExists(key: Defaults.selectedGenresKey) {
                         // not to make movies list empty if user have not yet selected genres
-                        if let genreSelected = self.mng?.getGenresDict()![Constants.actionId] {
-                            self.mng?.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
+                        if let genreSelected = self.mng.getGenresDict()![Constants.actionId] {
+                            self.mng.saveUserSelectedGenre(genreSelected: genreSelected, isSelected: true)
                         }
                     }
-                    if let movs = self.mng?.save(movieResults: movieResults) {
-                        if !movs.isEmpty {
-                            self.movies += movs
-                        }
+                    let movs = self.mng.save(movieResults: movieResults)
+                    if !movs.isEmpty {
+                        self.movies += movs
                     }
                 }
                 
@@ -128,9 +127,8 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
     
     func getGenres(with movie: Movie) -> String {
         var genres = ""
-        if let gens = self.mng?.getGenreNamesSequence(movie: movie) {
-            genres = gens
-        }
+        let gens = self.mng.getGenreNamesSequence(movie: movie)
+        genres = gens
         
         return genres
     }

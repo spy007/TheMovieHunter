@@ -25,7 +25,7 @@ protocol MovieTableViewProtocol: class {
 
 protocol  MovieTablePresenterProtocol: class {
     var view: MovieTableViewProtocol?  { get set }
-    var interactor: MovieTableInteractorProtocol?  { get set }
+    var interactor: MovieTableInteractorProtocol  { get set }
     
     // VIEW -> PRESENTER
     func viewWillAppear()

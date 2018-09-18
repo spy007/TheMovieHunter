@@ -23,7 +23,7 @@ protocol MovieSearchTableViewProtocol: class {
 
 protocol  MovieSearchTablePresenterProtocol: class {
     var view: MovieSearchTableViewProtocol?  { get set }
-    var interactor: MovieSearchTableInteractorProtocol?  { get set }
+    var interactor: MovieSearchTableInteractorProtocol  { get set }
     
     // VIEW -> PRESENTER
     func viewDidLoad(view: MovieSearchTableViewProtocol?)

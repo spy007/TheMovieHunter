@@ -11,24 +11,17 @@ import Foundation
 class MovieSearchTablePresenter: MovieSearchTablePresenterProtocol {
     // TODO: figure out how not to initialize view and interactor below like in IOS-Viper-Architecture project
     weak var view: MovieSearchTableViewProtocol?
-    var interactor: MovieSearchTableInteractorProtocol?
+    lazy var interactor: MovieSearchTableInteractorProtocol = MovieSearchTableInteractor(presenter: self)
     
     func viewDidLoad(view: MovieSearchTableViewProtocol?) {
         if self.view == nil {
             self.view = view
         }
-        if interactor == nil {
-            interactor = MovieSearchTableInteractor(presenter: self)
-        }
     }
     
     // MARK: Public methods
     func getGenres(with movie: Movie) -> String {
-        var genres = ""
-        if let interactor = interactor {
-            genres = interactor.getGenres(with: movie)
-        }
-        return genres
+        return interactor.getGenres(with: movie)
     }
     
     func showError(_ errorMessage: String) {
@@ -47,9 +40,7 @@ class MovieSearchTablePresenter: MovieSearchTablePresenterProtocol {
     }
     
     func searchMovies(with searchText: String) {
-        if let interactor = interactor {
-            interactor.searchMovies(with: searchText)
-            view?.showLoading()
-        }
+        interactor.searchMovies(with: searchText)
+        view?.showLoading()
     }
 }

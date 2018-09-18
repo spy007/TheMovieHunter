@@ -11,7 +11,7 @@ import Foundation
 class MovieTablePresenter: MovieTablePresenterProtocol {
         // TODO: figure out how not to initialize view and interactor below like in IOS-Viper-Architecture project
     weak var view: MovieTableViewProtocol?
-    var interactor: MovieTableInteractorProtocol?
+    lazy var interactor: MovieTableInteractorProtocol = MovieTableInteractor(presenter: self)
     
     func viewWillAppear() {
         guard let controller = try! view?.getTabBarController() as? MoviesTabBarController else {
@@ -27,19 +27,14 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
         if self.view == nil {
             self.view = view
         }
-        if interactor == nil {
-            interactor = MovieTableInteractor(presenter: self)
-        }
         requestMoviesData(userFiredAction: false)
     }
     
     func requestMoviesData(userFiredAction: Bool) {
-        if let interactor = interactor {
-            interactor.requestMoviesData()
-            if !userFiredAction {
-                if let view = view {
-                    view.showLoading()
-                }
+        interactor.requestMoviesData()
+        if !userFiredAction {
+            if let view = view {
+                view.showLoading()
             }
         }
     }
@@ -47,11 +42,7 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
     // MARK: Public methods
     
     func getGenres(with movie: Movie) -> String {
-        var genres = ""
-        if let interactor = interactor {
-            genres = interactor.getGenres(with: movie)
-        }
-        return genres
+        return interactor.getGenres(with: movie)
     }
     
     func showError(_ errorMessage: String) {
@@ -70,14 +61,10 @@ class MovieTablePresenter: MovieTablePresenterProtocol {
     }
     
     func searchMovies(with searchText: String) {
-        if let interactor = interactor {
-            interactor.searchMovies(with: searchText)
-        }
+        interactor.searchMovies(with: searchText)
     }
     
     func searchActive(searchActive: Bool) {
-        if let interactor = interactor {
-            interactor.searchActive(searchActive: searchActive)
-        }
+        interactor.searchActive(searchActive: searchActive)
     }
 }

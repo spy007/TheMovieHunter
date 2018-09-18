@@ -13,7 +13,7 @@ class MovieSearchTableInteractor: MovieSearchTableInteractorProtocol {
     // MARK: Properties
     
     private var movies: [Movie] = []
-    private var mng: CoreDataManager? = nil
+    private var mng: CoreDataManager
     var presenter: MovieSearchTablePresenterProtocol
     
     init(presenter: MovieSearchTablePresenterProtocol) {
@@ -68,11 +68,6 @@ class MovieSearchTableInteractor: MovieSearchTableInteractorProtocol {
     }
     
     func getGenres(with movie: Movie) -> String {
-        var genres = ""
-        if let gens = self.mng?.getGenreNamesSequence(movie: movie) {
-            genres = gens
-        }
-        
-        return genres
+        return self.mng.getGenreNamesSequence(movie: movie)
     }
 }
