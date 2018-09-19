@@ -11,6 +11,7 @@
 		868187B5214FD37F00A673A6 /* MovieSearchTableProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */; };
 		868187B7214FE76900A673A6 /* MovieSearchTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */; };
 		868187B9214FE82A00A673A6 /* MovieSearchTableInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */; };
+		868187BB21513A4800A673A6 /* AppDependecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868187BA21513A4800A673A6 /* AppDependecies.swift */; };
 		8A1DDBF52105B9DA00657C10 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */; };
 		8A1DDBF62105B9DA00657C10 /* emptyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBF02105B9D900657C10 /* emptyStar.png */; };
 		8A1DDBF72105B9DA00657C10 /* filledStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDBF12105B9D900657C10 /* filledStar.png */; };
@@ -66,6 +67,7 @@
 		868187B4214FD37F00A673A6 /* MovieSearchTableProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableProtocols.swift; sourceTree = "<group>"; };
 		868187B6214FE76900A673A6 /* MovieSearchTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTablePresenter.swift; sourceTree = "<group>"; };
 		868187B8214FE82A00A673A6 /* MovieSearchTableInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchTableInteractor.swift; sourceTree = "<group>"; };
+		868187BA21513A4800A673A6 /* AppDependecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependecies.swift; sourceTree = "<group>"; };
 		8A1DDBEF2105B9D900657C10 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		8A1DDBF02105B9D900657C10 /* emptyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emptyStar.png; sourceTree = "<group>"; };
 		8A1DDBF12105B9D900657C10 /* filledStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filledStar.png; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				8A9EF25920F34C6400188E69 /* Assets.xcassets */,
 				8A9EF25B20F34C6400188E69 /* LaunchScreen.storyboard */,
 				8A9EF25E20F34C6400188E69 /* Info.plist */,
+				868187BA21513A4800A673A6 /* AppDependecies.swift */,
 			);
 			path = TheMovieHunter;
 			sourceTree = "<group>";
@@ -427,6 +430,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TheMovieHunter/Pods-TheMovieHunter-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Dip/Dip.framework",
+				"${BUILT_PRODUCTS_DIR}/Dip-UI/Dip_UI.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRangeSlider/SwiftRangeSlider.framework",
@@ -436,6 +441,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dip_UI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRangeSlider.framework",
@@ -482,6 +489,7 @@
 				8A98A3E9211DD9C200B4039F /* GuestSessionResponse.swift in Sources */,
 				8A9EF25320F34C6300188E69 /* AppDelegate.swift in Sources */,
 				868187B9214FE82A00A673A6 /* MovieSearchTableInteractor.swift in Sources */,
+				868187BB21513A4800A673A6 /* AppDependecies.swift in Sources */,
 				8A4930A420FF5126007E1E46 /* CoreDataManager.swift in Sources */,
 				8A30B856212C4D8A00DED434 /* VoteControl.swift in Sources */,
 				868187B3214FCEEE00A673A6 /* MovieSearchTableViewController.swift in Sources */,

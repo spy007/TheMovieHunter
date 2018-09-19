@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MovieTableViewProtocol: class {
-    var presenter: MovieTablePresenterProtocol { get set }
+    var presenter: MovieTablePresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
     func showLoading()

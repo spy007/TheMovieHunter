@@ -11,6 +11,8 @@ pod 'Crashlytics'
 pod 'SwiftRangeSlider'
 pod 'PKHUD'
 pod 'Hero'
+pod 'Dip'
+pod 'Dip-UI'
 end
 
 post_install do |installer|

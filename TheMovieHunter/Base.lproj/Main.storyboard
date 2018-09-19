@@ -120,8 +120,8 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="cellTitle"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="U24-HN-mOU" customClass="VoteControl" customModule="TheMovieHunter" customModuleProvider="target">
-                                            <rect key="frame" x="157" y="51" width="202" height="28"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="U24-HN-mOU" customClass="VoteControl" customModule="TheMovieHunter" customModuleProvider="target">
+                                            <rect key="frame" x="157" y="49" width="202" height="30"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                                     <size key="value" width="30" height="30"/>
@@ -159,6 +159,7 @@
                     <navigationItem key="navigationItem" title="Movies" id="wJA-Gs-wMa"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="dipTag" value="MovieTableViewController"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="VIy-PH-xOP" kind="show" identifier="ShowSearch" id="MVZ-sD-ocV"/>
@@ -538,6 +539,6 @@
         <image name="person" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="414-9d-aHB"/>
+        <segue reference="wtv-cw-iiC"/>
     </inferredMetricsTieBreakers>
 </document>
