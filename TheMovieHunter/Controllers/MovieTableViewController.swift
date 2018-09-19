@@ -14,7 +14,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     //MARK: Properties
 
     // TODO: figure out how not to initialize presenter below like in IOS-Viper-Architecture project
-    var presenter: MovieTablePresenterProtocol = MovieTablePresenter()
+    var presenter: MovieTablePresenterProtocol?
     var refreshView : UIRefreshControl = UIRefreshControl()
     var searchBar: UISearchBar = UISearchBar()
     var movies: [Movie] = []
@@ -28,12 +28,12 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
         self.navigationItem.titleView = searchBar
         refreshView.addTarget(self, action: #selector(requestMoviesData(userFiredAction:)), for: .valueChanged)
         tableView.refreshControl = refreshView
-        presenter.viewDidLoad(view: self)
+        presenter?.viewDidLoad(view: self)
     }
 
     override func viewWillAppear(_ animation: Bool) {
         super.viewWillAppear(animation)
-        presenter.viewWillAppear()
+        presenter?.viewWillAppear()
     }
 
     func getTabBarController() throws -> UITabBarController {
@@ -45,7 +45,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
     @objc
     func requestMoviesData(userFiredAction: Bool = true){
-        presenter.requestMoviesData(userFiredAction: userFiredAction)
+        presenter?.requestMoviesData(userFiredAction: userFiredAction)
     }
 
     // MARK: - Table view data source
@@ -131,7 +131,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
 
                 let selectedMovie = movies[indexPath.row]
                 movieDetailViewController.movie = selectedMovie
-                movieDetailViewController.genres = presenter.getGenres(with: selectedMovie)
+                movieDetailViewController.genres = presenter!.getGenres(with: selectedMovie)
 
             } else if identifier == "ShowSearch" {
                 return
@@ -172,15 +172,15 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        presenter.searchActive(searchActive: true)
+        presenter?.searchActive(searchActive: true)
     }
 
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        presenter.searchActive(searchActive: true)
+        presenter?.searchActive(searchActive: true)
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        presenter.searchActive(searchActive: true)
+        presenter?.searchActive(searchActive: true)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -188,7 +188,7 @@ class MovieTableViewController: UITableViewController, UISearchBarDelegate, Movi
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchMovies(with: searchText)
+        presenter?.searchMovies(with: searchText)
     }
 
     func showMovies(with movies: [Movie]) {

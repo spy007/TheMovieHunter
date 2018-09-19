@@ -10,12 +10,15 @@ import UIKit
 import CoreData
 import Fabric
 import Crashlytics
+import Dip
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    //let container = DependencyContainer(configBlock: configureContainer)
+    let container = DependencyContainer.configure()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

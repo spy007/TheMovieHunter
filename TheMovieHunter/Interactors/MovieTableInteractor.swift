@@ -12,7 +12,7 @@ class MovieTableInteractor: MovieTableInteractorProtocol {
     // MARK: Properties
     
     private var movies: [Movie] = []
-    private var mng: CoreDataManager
+    var mng: CoreDataManager
     var presenter: MovieTablePresenterProtocol
     private var searchActive : Bool = false
     

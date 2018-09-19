@@ -21,7 +21,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
     private var genresSelectedDict = [Int:Genre]()
     private var lowerValue: Double? = nil
     // TODO: remove
-    private var mng: CoreDataManager? = nil
+    var mng: CoreDataManager?
     private var presenter: SearchSettingsPresenterProtocol?
     
     override func viewDidLoad() {
@@ -138,7 +138,7 @@ class SearchSettingsViewController: UIViewController, UITableViewDataSource {
         let isOn = switchView.isOn
         let tag = switchView.tag
         print("switch changed witch tag=\(tag) isOn=\(isOn)")
-        self.mng?.saveUserSelectedGenre(genreSelected: self.genresSelectedDict[tag], isSelected: isOn)
+        //self.mng?.saveUserSelectedGenre(genreSelected: self.genresSelectedDict[tag], isSelected: isOn)
         switchView.isOn = isOn
         setFlagForUpdateMovies()
     }
